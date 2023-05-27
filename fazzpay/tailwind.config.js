@@ -12,6 +12,12 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        nunito: ['"Nunito Sans"', 'sans-serif']
+      },
+      colors: {
+        primary: "#6379F4"
+      }
     },
   },
   plugins: [],

@@ -11,3 +11,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.button-primary {
+  @apply border bg-primary px-6 py-2 rounded-lg font-semibold text-white hover:bg-white hover:border hover:border-primary ease-in-out duration-100 hover:text-primary active:scale-95
+  }
