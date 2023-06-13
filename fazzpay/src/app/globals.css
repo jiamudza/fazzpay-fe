@@ -15,3 +15,16 @@ body {
 .button-primary {
   @apply border bg-primary px-6 py-2 rounded-lg font-semibold text-white hover:bg-white hover:border hover:border-primary ease-in-out duration-100 hover:text-primary active:scale-95
   }
+.button-primary2 {
+  @apply border bg-primary w-full py-2 rounded-lg font-semibold text-white hover:bg-white hover:border hover:border-primary ease-in-out duration-100 hover:text-primary active:scale-95
+  }
+
+.border-base {
+@apply border-none}
+
+.inset-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
