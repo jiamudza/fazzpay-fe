@@ -3,6 +3,7 @@ import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
 import MainMenu from "@/app/components/MainMenu";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 //icons
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
@@ -33,11 +34,11 @@ export default function Home() {
             <div>
               <button className=" bg-slate-200 w-32 bg-opacity-60 outline outline-white rounded-lg flex justify-between gap-2 py-2 px-3 outline-1 hover:bg-blue-300 active:scale-95 duration-200 ease-in-out">
                 <AiOutlineArrowUp size={25} className="text-slate-500" />
-                <p className="font-bold">Transfer</p>
+                <Link href='/page/transfer' className="font-bold">Transfer</Link>
               </button>
               <button className=" bg-slate-200 w-32 bg-opacity-60 outline outline-white rounded-lg flex justify-between gap-2 py-2 px-3 outline-1 hover:bg-blue-300 active:scale-95 duration-200 ease-in-out mt-5">
                 <AiOutlinePlus size={25} className="text-slate-500" />
-                <p className="font-bold">Top Up</p>
+                <Link href='/page/topup' className="font-bold">Top Up</Link>
               </button>
             </div>
           </div>

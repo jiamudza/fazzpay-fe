@@ -14,10 +14,14 @@ export default function Login() {
           <Image
             src={phone}
             className="absolute object-contain -rotate-12 origin-bottom h-[60vh]"
+            alt="phone"
+            priority='true'
           />
           <Image
             src={phone2}
             className="object-contain rotate-12 origin-bottom h-[60vh]"
+            alt="phone2"
+            priority=''
           />
         </div>
         <div className="px-28">

@@ -5,6 +5,7 @@ import { RxDashboard } from "react-icons/rx";
 import { RxPerson } from "react-icons/rx";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
+import Link from "next/link";
 
 //utils
 import { usePathname } from "next/navigation";
@@ -18,19 +19,19 @@ export default function MainMenu() {
     <div className="font-nunito">
       <div className={pathname === '/page/home' ? "text-primary font-bold flex gap-3 my-10 cursor-pointer" : "text-slate-500 font-semibold flex gap-3 my-10 hover:text-blue-300 cursor-pointer"}>
         <RxDashboard size={20} />
-        <p>Dashboard</p>
+        <Link href='/page/home' >Dashboard</Link>
       </div>
       <div className={pathname === '/page/transfer' ? "text-primary font-bold flex gap-3 my-10 cursor-pointer" : "text-slate-500 font-semibold flex gap-3 my-10 hover:text-blue-300 cursor-pointer"}>
         <AiOutlineArrowUp size={20} />
-        <p>Transfer</p>
+        <Link href='/page/transfer' >Transfer</Link>
       </div>
       <div className={pathname === '/page/topup' ? "text-primary font-bold flex gap-3 my-10 cursor-pointer" : "text-slate-500 font-semibold flex gap-3 my-10 hover:text-blue-300 cursor-pointer"}>
         <AiOutlinePlus size={20} />
-        <p>Top Up</p>
+        <Link href='/page/topup' >Top up</Link>
       </div>
       <div className={pathname === '/page/profile' ? "text-primary font-bold flex gap-3 my-10 cursor-pointer" : "text-slate-500 font-semibold flex gap-3 my-10 hover:text-blue-300 cursor-pointer"}>
         <RxPerson size={20} />
-        <p>Profile</p>
+        <Link href='/page/profile' >Profile</Link>
       </div>
     </div>
   );

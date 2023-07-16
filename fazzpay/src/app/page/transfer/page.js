@@ -16,6 +16,13 @@ import PinConfirm from "./transfer1/PinConfirm";
 export default function page() {
 
   const [pinModal, setPinModal] = useState('hidden')
+  const [status, setStatus] = useState(0)
+
+  const handleClick = num => {
+      setStatus(num)
+
+      console.log('argument of child = ', num)
+  }
 
   return (
     <div className="bg-[#e5e5e5]">
@@ -27,11 +34,12 @@ export default function page() {
           <MainMenu />
         </div>
         <div className="bg-white rounded-xl p-10 mt-10 w-full lg:mx-10 mx-auto">
-            <Confirmation />
+            {/* {status == 1 ? <TransferAmount /> : <Confirmation />} */}
+            <Transfer handleClick={handleClick} />
         </div>
 
         <div className="absolute z-10 w-full">
-        <PinConfirm />
+        {/* <PinConfirm /> */}
         </div>
         
       </main>
