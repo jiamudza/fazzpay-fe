@@ -1,6 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 export default function TransferAmount() {
+
+  const [data, setData] = useState(
+    {}
+  )
+
+  useEffect(() => {
+    axios.get('https://fazz.adaptable.app/api/v1/users/:id')
+    .then(res => {
+      setData(res.data.data)
+      console.log(data)
+    })
+    .catch(err => {
+      err
+    })
+  })
   return (
     <div className="w-full">
       <p>Transfer Money</p>

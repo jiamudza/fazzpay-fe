@@ -1,50 +1,55 @@
-"use client";
-import FooterAfterLogin from "@/app/components/FooterAfterLogin";
-import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
-import MainMenu from "@/app/components/MainMenu";
-import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+'use client'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import Placeholder from '../../../assets/img/placeholder.jpg'
+import MainMenu from '@/app/components/MainMenu'
 
-//icons
-import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-import { AiOutlinePlus } from "react-icons/ai";
-import Transfer from "./transfer1/Transfer";
-import TransferAmount from "./transfer1/TransferAmount";
-import Confirmation from "./transfer1/Confirmation";
-import PinConfirm from "./transfer1/PinConfirm";
+export default function Transfer({handleClick}) {
 
-export default function page() {
+    const [users, setUsers] = useState({
+        data: []
+    })
 
-  const [pinModal, setPinModal] = useState('hidden')
-  const [status, setStatus] = useState(0)
-
-  const handleClick = num => {
-      setStatus(num)
-
-      console.log('argument of child = ', num)
-  }
-
+    useEffect(() => {
+        axios({
+            url: `https://fazz.adaptable.app/api/v1/user`,
+            method: "GET",
+        })
+        .then(res => {
+            setUsers({
+                ...users,
+                data: res.data.data
+            })
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
+    })
   return (
-    <div className="bg-[#e5e5e5]">
-      <header className="px-10 py-6 bg-white">
-        <HeaderAfterLogin />
-      </header>
-      <main className="lg:flex mb-10">
-        <div className="bg-white lg:mx-10 px-10 py-5 rounded-xl shadow-xl my-10 w-72 mx-auto">
-          <MainMenu />
+    <div className='font-nunito flex'>
+        <div>
+            <MainMenu />
         </div>
-        <div className="bg-white rounded-xl p-10 mt-10 w-full lg:mx-10 mx-auto">
-            {/* {status == 1 ? <TransferAmount /> : <Confirmation />} */}
-            <Transfer handleClick={handleClick} />
+        <div id="content"  className="">
+            <p className="text-xl font-bold">Search Receiver</p>
+            <input type="text" className="bg-slate-300 mt-5 rounded-lg p-2 w-full" placeholder="search receiver here" />
+            
+            {users.data.map((item => {
+                return (<div onClick={ e => handleClick(1)} className='flex m-4 gap-4 cursor-pointer'>
+                    <Image src={item.user_image === null ? Placeholder : `${item.user_image}`}
+                    className='h-16 w-16 rounded-md'
+                    width={500}
+                    height={500}
+                    />
+                    <div>
+                        <p className='font-bold'>{`${item.first_name} ${item.last_name}`}</p>
+                        <p className='text-xs text-slate-400 mt-4'>{item.phone === null ? '-' : item.phone}</p>
+                    </div>
+                </div>)
+            }))
+            }
         </div>
-
-        <div className="absolute z-10 w-full">
-        {/* <PinConfirm /> */}
-        </div>
-        
-      </main>
-
-      <FooterAfterLogin />
     </div>
-  );
-}
+  )
+        }
