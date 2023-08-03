@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function PinConfirm({modal}) {
   return (
-    <div className='h-screen bg-slate-400 bg-opacity-70 relative top-1/2'>
+    <div className='h-screen bg-slate-400 bg-opacity-0 relative top-1/2'>
         <div className=' py-10 bg-white grid px-10 inset-center rounded-lg shadow-xl'>
             <p className='bg-red-500 w-5 text-center absolute right-0 rounded-tr-lg hover:bg-white border-3 border-transparent  hover:text-red-500 hover:border-3 cursor-pointer hover:border-red-500 text-white inline'>x</p>
             <p className='font-bold'>Enter Pin for Confirmation</p>

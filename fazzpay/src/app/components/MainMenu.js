@@ -16,7 +16,7 @@ export default function MainMenu() {
   // const [active, setActive] = useState(pathname)
 
   return (
-    <div className="font-nunito">
+    <div className="font-nunito bg-white mx-10 px-10 py-5 rounded-xl shadow-xl my-10 w-72">
       <div className={pathname === '/page/home' ? "text-primary font-bold flex gap-3 my-10 cursor-pointer" : "text-slate-500 font-semibold flex gap-3 my-10 hover:text-blue-300 cursor-pointer"}>
         <RxDashboard size={20} />
         <Link href='/page/home' >Dashboard</Link>

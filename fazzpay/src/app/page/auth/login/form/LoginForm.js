@@ -70,7 +70,7 @@ With 30.000+ Users
                         ...loginForm,
                         email: e.target.value,
                     })
-                }} type='text' placeholder='Enter your e-mail' className='text-sm w-full active:border-none active:outline-none '/>
+                }} type='text' placeholder='Enter your e-mail' className='text-sm focus:outline-0 w-full active:border-none active:outline-none '/>
             </div>
             <div className='flex gap-x-2 content-center border-b py-3 mt-10'>
                 <FiLock className='text-slate-400' size={20} />
@@ -81,7 +81,7 @@ With 30.000+ Users
                         password: e.target.value,
                     })
                 }}
-                type='text' placeholder='Enter your password' className='text-sm w-full active:border-none active:outline-none '/>
+                type='text' placeholder='Enter your password' className='text-sm w-full active:border-none focus:outline-none '/>
             </div>
             <p className='font-bold text-end mt-3'>
                 Forgot Passoword?

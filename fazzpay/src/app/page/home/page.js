@@ -20,7 +20,7 @@ export default function Home() {
         <HeaderAfterLogin />
       </header>
       <main className="flex mb-10">
-        <div className="bg-white mx-10 px-10 py-5 rounded-xl shadow-xl my-10 w-72">
+        <div className="">
           <MainMenu />
         </div>
         <div id="content" className="w-full mt-10 mx-10">
