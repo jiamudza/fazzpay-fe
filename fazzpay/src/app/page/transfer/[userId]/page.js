@@ -5,13 +5,16 @@ import axios from "axios";
 import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
 import Footer from "@/components/footer/Footer";
 import Image from "next/image";
+import MainMenu from "@/app/components/MainMenu";
+import { TbRuler } from "react-icons/tb";
 
 export default function TransferAmount() {
   const pathName = usePathname();
   const userId = pathName.split("/page/transfer/");
   const router = useRouter();
   const [data, setData] = useState({});
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     axios
@@ -25,11 +28,17 @@ export default function TransferAmount() {
   }, [pathName]);
 
   useEffect(() => {
-    axios.get(`https://fazz.adaptable.app/api/v1/user/${JSON.parse(localStorage.getItem('@fazzLogin')).user.user_id}`)
-    .then(res => {
-      setUser(res.data.data)
-    }).catch(err => err)
-  }, [localStorage])
+    axios
+      .get(
+        `https://fazz.adaptable.app/api/v1/user/${
+          JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id
+        }`
+      )
+      .then((res) => {
+        setUser(res.data.data);
+      })
+      .catch((err) => err);
+  }, [pathName]);
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -43,104 +52,119 @@ export default function TransferAmount() {
 
   const handelPayment = (e) => {
     e.preventDefault();
+    sessionStorage.setItem('@session', JSON.stringify(paymentDetail))
+    router.push(`/page/transfer/detail/${userId[1]}`)
+  };
 
-    if (paymentDetail.amount === 0 || paymentDetail === "undefined") {
+  useEffect(() => {
+    if (typeof paymentDetail.amount === 'undefined' || typeof paymentDetail.amount === NaN) {
       setValid(false);
     } else {
       setValid(true);
     }
+  }, [paymentDetail.amount])
 
-    if (valid === true) {
-      sessionStorage.setItem("@session", JSON.stringify(paymentDetail));
-      router.push(`/page/transfer/detail/${userId[1]}`);
-    } else {
-      router.push(`/page/transfer/${userId[1]}`);
-    }
-  };
 
   return (
-    <div>
-      <div className="mt-2 px-2 bg-slate-400">
+    <div className="bg-[#e5e5e5]">
+      <div className="px-10 py-6 bg-white">
         <HeaderAfterLogin />
       </div>
-      <div className="w-full px-10 mx-auto">
-        <p className="font-bold text-2xl text-center">Transfer Money</p>
+      <div className="flex">
+        <aside className="">
+          <MainMenu />
+        </aside>
+        <div className="p-10 w-full m-10 bg-white rounded-xl shadow-xl">
+          <p className="font-bold text-2xl text-center">Transfer Money</p>
 
-        <div className="mx-auto">
-          <div className="mt-5 flex items-center gap-5">
-            <Image
-              src={data.user_image}
-              alt="user(receiver)-image"
-              width={100}
-              height={100}
-              className="h-10 w-10 rounded-lg bg-primary"
-            />
-            <div>
-              <p className="font-bold">{`${data.first_name} ${data.last_name}`}</p>
-              <p className="text-sm text-slate-400">{data.phone}</p>
+          <div className="mx-auto">
+            <div className="mt-5 flex items-center gap-5">
+              <Image
+                src={data.user_image}
+                alt="user(receiver)-image"
+                width={100}
+                height={100}
+                className="h-10 w-10 rounded-lg bg-primary"
+              />
+              <div>
+                <p className="font-bold">{`${data.first_name} ${data.last_name}`}</p>
+                <p className="text-sm text-slate-400">{data.phone}</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <p className="text-slate-600 mt-5">
-          Type the amount you want to transfer and then press continue to the
-          next steps.
-        </p>
-
-        <div className="w-full mx-auto">
-          <p
-            className={
-              valid != false
-                ? "hidden"
-                : "transition-transform duration-150 block" +
-                  " text-center fail-shadow px-5 py-2 mt-5 rounded-lg w-60 mx-auto font-nunito text-red-500"
-            }
-          >
-            Transfer amount is not valid
-          </p>
-          <input
-            onChange={(e) => {
-              setPaymentDetail({
-                ...paymentDetail,
-                name: `${data.first_name} ${data.last_name}`,
-                phone: data.phone,
-                date: new Date(),
-                amount: parseInt(e.target.value),
-                image: data.user_image,
-                balance: (user.balance - e.target.value)
-              });
-            }}
-            type="number"
-            className="text-4xl text-primary font-bold py-1 outline-none  focus:outline-0 mt-5 border-b-2 w-40 text-center block mx-auto"
-            placeholder="0.00"
-          />
-          <p className="text-center font-bold block mx-auto mt-10">
-            {rupiah(user.balance)} is Available
+          <p className="text-slate-600 mt-5">
+            Type the amount you want to transfer and then press continue to the
+            next steps.
           </p>
 
-          <input
-            onChange={(e) => {
-              setPaymentDetail({
-                ...paymentDetail,
-                notes: e.target.value,
-              });
-            }}
-            type="text"
-            className="w-100 p-2 focus:outline-0 overflow-y-auto border-b block mx-auto mt-5 border-slate-500 text-center"
-            placeholder="Add some notes here"
-          />
-        </div>
+          <div className="w-full mx-auto">
+            <p
+              className={
+                error != true
+                  ? "hidden"
+                  : "transition-transform duration-150 block" +
+                    " text-center fail-shadow px-5 py-2 mt-5 rounded-lg w-60 mx-auto font-nunito text-red-500"
+              } 
+            >
+              Transfer amount is not valid
+            </p>
+            <input
+              onChange={(e) => {
+                setPaymentDetail({
+                  ...paymentDetail,
+                  name: `${data.first_name} ${data.last_name}`,
+                  phone: data.phone,
+                  date: new Date(),
+                  amount: e.target.value,
+                  image: data.user_image,
+                  balance: user.balance - e.target.value,
+                });
 
-        <button
-          onClick={handelPayment}
-          className={
-            valid === true
-              ? "button-primary mx-auto mt-10 flex items-center justify-center content-center"
-              : "button-primary bg-blue-400 mx-auto mt-10 flex items-center justify-center content-center"
-          }
-        >
-          Continue
-        </button>
+                if(e.target.value.length === 0) setValid(false)
+                if(e.target.value.length > 0) {
+                  setError(false)
+                  setValid(true)
+                }
+
+              }}
+              type="number"
+              className="text-4xl text-primary font-bold py-1 outline-none  focus:outline-0 mt-5 border-b-2 w-40 text-center block mx-auto"
+              placeholder="0.00"
+            />
+            <p className="text-center font-bold block mx-auto mt-10">
+              {rupiah(user.balance)} is Available
+            </p>
+
+            <input
+              onChange={(e) => {
+                setPaymentDetail({
+                  ...paymentDetail,
+                  notes: e.target.value,
+                });
+              }}
+              type="text"
+              className="w-100 p-2 focus:outline-0 overflow-y-auto border-b block mx-auto mt-5 border-slate-500 text-center"
+              placeholder="Add some notes here"
+            />
+          </div>
+
+          {valid === true ? (
+            <button
+              onClick={handelPayment}
+              className="button-primary mx-auto mt-10 flex items-center justify-center content-center"
+            >
+              Continue
+            </button>
+          ) : (
+            <button onClick={(e) => {
+              e.preventDefault()
+              setError(true)
+            }} className="border bg-blue-200 px-6 py-2 rounded-lg font-semibold text-white ease-in-out duration-100 mx-auto mt-10 flex items-center justify-center content-center cursor-default">
+              Continue
+            </button>
+          )}
+        </div>
       </div>
       <div className="mt-20">
         <Footer />

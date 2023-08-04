@@ -43,3 +43,9 @@ body {
     margin: 0;
   }
 }
+
+.pin-shadow{
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(94,186,235,1);
+-moz-box-shadow: 0px 0px 8px 0px rgba(94,186,235,1);
+box-shadow: 0px 0px 8px 0px rgba(94,186,235,1);
+}

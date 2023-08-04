@@ -40,7 +40,8 @@ export default function Confirmation({ callback }) {
         receiverId: userId[1],
         amount: userData.amount,
       });
-      router.push(`/page/transfer/success/`)
+      sessionStorage.removeItem("@session");
+      alert("success");
     } else if (parseInt(pin) !== parseInt(user.data.pin))
       alert("your pin is not valid");
     else if (userData.amount > user.data.balance)
