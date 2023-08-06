@@ -93,7 +93,7 @@ With 30.000+ Users
             </button>
         </form>
 
-        <p className='mt-5 text-center'>Don't have an account? lets <span className='text-primary font-bold'>Sign Up</span></p>
+        <p className='mt-5 text-center'>Do not have an account? lets <span className='text-primary font-bold'>Sign Up</span></p>
     </div>
   )
 }
