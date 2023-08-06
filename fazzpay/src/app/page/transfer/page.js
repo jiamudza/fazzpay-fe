@@ -53,6 +53,7 @@ export default function Transfer({ handleClick }) {
                 className="flex m-4 gap-4 cursor-pointer"
               >
                 <Image
+                alt="user-picture"
                   src={
                     item.user_image === null
                       ? Placeholder

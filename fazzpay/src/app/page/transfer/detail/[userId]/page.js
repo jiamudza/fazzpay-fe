@@ -63,7 +63,7 @@ export default function Confirmation({ callback }) {
         });
       })
       .catch((err) => err);
-  }, [pathName]);
+  });
 
   return (
     <div

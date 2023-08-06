@@ -27,7 +27,7 @@ export default function page() {
 
       {/* //////////////////JUMBOTRON///////////////////// */}
       <div className="block lg:flex justify-items-start lg:px-32">
-        <Image src={phoneImage} className="" />
+        <Image alt="phone" src={phoneImage} className="" />
         <aside className="mt-20 text-center lg:text-start">
           <h1 className="font-extrabold text-5xl leading-normal">
             Awesome App <br /> For Saving{" "}
@@ -45,12 +45,12 @@ export default function page() {
       {/* Company LOGO */}
       <div className=" bg-indigo-400 opacity-6">
         <div className="p-5 flex flex-wrap justify-between">
-          <Image src={microsoft} className="object-contain" />
-          <Image src={dropbox} className="object-contain" />
-          <Image src={hnm} className="object-contain" />
-          <Image src={airbnb} className="object-contain" />
-          <Image src={canon} className="object-contain" />
-          <Image src={dell} className="object-contain" />
+          <Image alt="microsoft" src={microsoft} className="object-contain" />
+          <Image alt="dropbox" src={dropbox} className="object-contain" />
+          <Image alt="hnm" src={hnm} className="object-contain" />
+          <Image alt="airbnb" src={airbnb} className="object-contain" />
+          <Image alt="canon" src={canon} className="object-contain" />
+          <Image alt="dell" src={dell} className="object-contain" />
         </div>
       </div>
 
@@ -105,6 +105,7 @@ export default function page() {
 
         <div className="mx-auto block lg:flex lg:text-start lg:px-24 bg-slate-100">
           <Image
+          alt="phone-2"
             src={phoneImage2}
             className="object-contain mx-auto"
             sizes="40"

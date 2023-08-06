@@ -25,7 +25,7 @@ export default function TransferAmount() {
       .catch((err) => {
         err;
       });
-  }, [pathName]);
+  });
 
   useEffect(() => {
     axios
@@ -38,7 +38,7 @@ export default function TransferAmount() {
         setUser(res.data.data);
       })
       .catch((err) => err);
-  }, [pathName]);
+  });
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
