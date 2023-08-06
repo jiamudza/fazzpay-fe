@@ -13,7 +13,6 @@ import Image from "next/image";
 import axios from "axios";
 
 export default function Home() {
-  const pathname = usePathname();
 
   const [income, setIncome] = useState(true);
   const [user, setUser] = useState({});

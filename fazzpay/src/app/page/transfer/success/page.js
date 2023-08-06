@@ -11,7 +11,7 @@ import MainMenu from "@/app/components/MainMenu";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import {BiDownload} from "react-icons/bi"
 
-export default function Confirmation({ callback }) {
+export default function Confirmation() {
   const router = useRouter();
   const pathName = usePathname();
   const [user, setUser] = useState({

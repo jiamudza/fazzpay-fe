@@ -9,7 +9,7 @@ import Footer from "@/components/footer/Footer";
 
 import Link from "next/link";
 
-export default function Transfer({ handleClick }) {
+export default function Transfer() {
   const [users, setUsers] = useState({
     data: [],
   });
