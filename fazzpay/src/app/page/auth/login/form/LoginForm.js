@@ -52,6 +52,7 @@ export default function LoginForm() {
         if(localStorage.getItem('@fazzLogin')) router.push('/page/home')
     })
 
+
   return (
     <div>
         <p className='font-bold text-xl'>
@@ -81,7 +82,7 @@ With 30.000+ Users
                         password: e.target.value,
                     })
                 }}
-                type='text' placeholder='Enter your password' className='text-sm w-full active:border-none focus:outline-none '/>
+                type='password' placeholder='Enter your password' className='text-sm w-full active:border-none focus:outline-none '/>
             </div>
             <p className='font-bold text-end mt-3'>
                 Forgot Passoword?

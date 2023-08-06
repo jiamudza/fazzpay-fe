@@ -46,9 +46,9 @@ export default function Transfer({ handleClick }) {
             placeholder="search receiver here"
           />
 
-          {users.data.map((item) => {
+          {users.data.map((item, index) => {
             return (
-              <Link
+              <Link key={index}
                 href={`/page/transfer/${item.user_id}`}
                 className="flex m-4 gap-4 cursor-pointer"
               >

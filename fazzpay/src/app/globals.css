@@ -15,6 +15,9 @@ body {
 .button-primary {
   @apply border bg-primary px-6 py-2 rounded-lg font-semibold text-white hover:bg-white hover:border hover:border-primary ease-in-out duration-100 hover:text-primary active:scale-95;
 }
+.button-primary-reverse {
+  @apply border bg-white px-6 py-2 border-primary rounded-lg font-semibold text-primary hover:bg-primary hover:border hover:border-primary ease-in-out duration-100 hover:text-white active:scale-95;
+}
 .button-primary2 {
   @apply border bg-primary w-full py-2 rounded-lg font-semibold text-white hover:bg-white hover:border hover:border-primary ease-in-out duration-100 hover:text-primary active:scale-95;
 }
@@ -44,8 +47,8 @@ body {
   }
 }
 
-.pin-shadow{
-  -webkit-box-shadow: 0px 0px 8px 0px rgba(94,186,235,1);
--moz-box-shadow: 0px 0px 8px 0px rgba(94,186,235,1);
-box-shadow: 0px 0px 8px 0px rgba(94,186,235,1);
+.pin-shadow {
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(94, 186, 235, 1);
+  -moz-box-shadow: 0px 0px 8px 0px rgba(94, 186, 235, 1);
+  box-shadow: 0px 0px 8px 0px rgba(94, 186, 235, 1);
 }
