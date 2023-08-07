@@ -1,3 +1,4 @@
+'use client'
 import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
 import MainMenu from "@/app/components/MainMenu";
