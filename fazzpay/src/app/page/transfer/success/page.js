@@ -17,10 +17,9 @@ export default function Confirmation() {
   const [user, setUser] = useState({
     data: {},
   });
-  const [pin, setPin] = useState([]);
 
-  const userData = JSON.parse(sessionStorage.getItem("@session"));
-  const userId = pathName.split(`/page/transfer/detail/`);
+  const [userData, setUserData] = useState({})
+  // const userId = pathName.split(`/page/transfer/detail/`);
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -38,6 +37,11 @@ export default function Confirmation() {
   };
 
   useEffect(() => {
+    if(sessionStorage.getItem('@session')) {
+      setUserData(JSON.parse(sessionStorage.getItem("@session")))
+    }
+  })
+  useEffect(() => {
     axios
       .get(
         `https://fazz.adaptable.app/api/v1/user/${
@@ -52,7 +56,6 @@ export default function Confirmation() {
       })
       .catch((err) => err);
   });
-
   return (
     <div
       className={

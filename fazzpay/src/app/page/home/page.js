@@ -17,8 +17,14 @@ export default function Home() {
   const [income, setIncome] = useState(true);
   const [user, setUser] = useState({});
   const [history, setHistory] = useState([]);
-  const id = JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id;
+  const [id, setId] = useState('')
 
+  useEffect(() => {
+    if(localStorage.getItem('@fazzLogin')) {
+      setId(JSON.parse(localStorage.getItem('@fazzLogin')).user.user_id)
+    }
+  })
+  
   useEffect(() => {
     axios
       .get(`https://fazz.adaptable.app/api/v1/user/${id}`)
@@ -28,7 +34,7 @@ export default function Home() {
       .catch((err) => {
         err;
       });
-  }, [id]);
+  });
 
   useEffect(() => {
     axios
@@ -47,6 +53,8 @@ export default function Home() {
       currency: "IDR",
     }).format(number);
   }; 
+
+  console.log(user.user)
   return (
     <div className="bg-[#e5e5e5]">
       <header className="px-10 py-6 bg-white">
