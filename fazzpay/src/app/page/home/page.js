@@ -148,7 +148,7 @@ export default function Home() {
                 </p>
               </div>
                   {income === true ? 
-                  history.map((item, index) => {
+                 history && history.map((item, index) => {
                     if(item.user_id === item.sender_id && id !== item.user_id) {
                       return(
                         <div key={index} className="flex items-center justify-between px-5">
@@ -165,7 +165,7 @@ export default function Home() {
                     }
                   })
                    : 
-                   history.map((item, index) => {
+                  history && history.map((item, index) => {
                     if(item.user_id === item.receiver_id && id !== item.user_id) {
                       return(
                         <div key={index} className="flex items-center justify-between px-5">
