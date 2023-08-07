@@ -53,8 +53,6 @@ export default function Home() {
       currency: "IDR",
     }).format(number);
   }; 
-
-  console.log(user.user)
   return (
     <div className="bg-[#e5e5e5]">
       <header className="px-10 py-6 bg-white">
