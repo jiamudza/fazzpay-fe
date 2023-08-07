@@ -79,13 +79,13 @@ export default function TransferAmount() {
 
           <div className="mx-auto">
             <div className="mt-5 flex items-center gap-5">
-              <Image
+              {data.user_image && <Image
                 src={data.user_image}
                 alt="user(receiver)-image"
                 width={100}
                 height={100}
                 className="h-10 w-10 rounded-lg bg-primary"
-              />
+              />}
               <div>
                 <p className="font-bold">{`${data.first_name} ${data.last_name}`}</p>
                 <p className="text-sm text-slate-400">{data.phone}</p>

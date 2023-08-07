@@ -46,13 +46,13 @@ export default function Transfer() {
             placeholder="search receiver here"
           />
 
-          {users.data.map((item, index) => {
+          {users.data && users.data.map((item, index) => {
             return (
               <Link key={index}
                 href={`/page/transfer/${item.user_id}`}
                 className="flex m-4 gap-4 cursor-pointer"
               >
-                <Image
+               <Image
                 alt="user-picture"
                   src={
                     item.user_image === null
@@ -60,8 +60,9 @@ export default function Transfer() {
                       : `${item.user_image}`
                   }
                   className="h-16 w-16 rounded-md"
-                  width={500}
-                  height={500}
+                  width={200}
+                  height={200}
+                  priority
                 />
                 <div>
                   <p className="font-bold">{`${item.first_name} ${item.last_name}`}</p>

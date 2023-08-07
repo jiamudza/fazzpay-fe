@@ -16,8 +16,16 @@ export default function Confirmation({ callback }) {
   });
   const [pin, setPin] = useState([]);
 
-  const userData = JSON.parse(sessionStorage.getItem("@session"));
+  const [userData, setUserData] = useState({});
   const userId = pathName.split(`/page/transfer/detail/`);
+
+  useEffect(() => {
+    if (localStorage.getItem("@fazzLogin")) {
+      setUserData(JSON.parse(sessionStorage.getItem("@session")));
+    } else {
+      router.push(`/page/auth/login/`);
+    }
+  }, []);
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -38,9 +46,12 @@ export default function Confirmation({ callback }) {
       axios.post(`https://fazz.adaptable.app/api/v1/transaction/`, {
         senderId: JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id,
         receiverId: userId[1],
-        amount: userData.amount,
+        amount: parseInt(userData.amount),
+      })
+      .catch(err => {
+        `ini ${err}`
       });
-      router.push(`/page/transfer/success/`)
+      router.push(`/page/transfer/success/`);
     } else if (parseInt(pin) !== parseInt(user.data.pin))
       alert("your pin is not valid");
     else if (userData.amount > user.data.balance)
@@ -83,13 +94,15 @@ export default function Confirmation({ callback }) {
         <div className="m-10 p-10 rounded-xl shadow-2xl lg:w-full bg-white">
           <p className="font-bold">Transfer To</p>
           <div className="mt-5 flex items-center gap-5">
-            <Image
-              src={userData.image}
-              width={100}
-              height={100}
-              alt="receiver-image"
-              className="h-10 w-10 rounded-lg bg-primary"
-            />
+            {userData.image && (
+              <Image
+                src={userData.image}
+                width={100}
+                height={100}
+                alt="receiver-image"
+                className="h-10 w-10 rounded-lg bg-primary"
+              />
+            )}
             <div>
               <p className="font-bold">{userData.name}</p>
               <p className="text-sm text-slate-400">{userData.phone}</p>

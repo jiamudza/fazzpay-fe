@@ -4,6 +4,7 @@ import Footer from "@/components/footer/Footer";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 import Image from "next/image";
 import MainMenu from "@/app/components/MainMenu";
@@ -29,13 +30,6 @@ export default function Confirmation() {
   };
 
   const [pinBox, setPinBox] = useState(false);
-
-  const handleBack = (e) => {
-    e.preventDefault()
-
-    router.push(`/page/home/`)
-  };
-
   useEffect(() => {
     if(sessionStorage.getItem('@session')) {
       setUserData(JSON.parse(sessionStorage.getItem("@session")))
@@ -116,12 +110,12 @@ export default function Confirmation() {
             <button className="button-primary-reverse mt-10 flex gap-2">
               <BiDownload size={20}/> Download PDF
             </button>
-            <button
-              onClick={handleBack}
+            <Link
+              href='/page/home'
               className="button-primary mt-10"
             >
               Back Home
-            </button>
+            </Link>
           </div>
         </div>
       </main>
