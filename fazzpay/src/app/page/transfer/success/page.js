@@ -35,21 +35,7 @@ export default function Confirmation() {
       setUserData(JSON.parse(sessionStorage.getItem("@session")))
     }
   })
-  useEffect(() => {
-    axios
-      .get(
-        `https://fazz.adaptable.app/api/v1/user/${
-          JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id
-        }`
-      )
-      .then((res) => {
-        setUser({
-          ...user,
-          data: res.data.data,
-        });
-      })
-      .catch((err) => err);
-  });
+
   return (
     <div
       className={
