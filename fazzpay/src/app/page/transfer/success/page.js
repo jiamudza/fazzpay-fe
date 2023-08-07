@@ -36,7 +36,7 @@ export default function Confirmation() {
     e.preventDefault()
 
     sessionStorage.removeItem('@session')
-    router.push('/')
+    router.push('/page/home')
   }
 
   return (
@@ -101,7 +101,7 @@ export default function Confirmation() {
             </button>
             <Link
             onClick={handleBack}
-              href='/'
+            href={'/page/home'}
               className="button-primary mt-10"
             >
               Back Home
