@@ -1,4 +1,3 @@
-"use client";
 import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
 import MainMenu from "@/app/components/MainMenu";
@@ -24,7 +23,7 @@ export default function Home() {
       setId(JSON.parse(localStorage.getItem('@fazzLogin')).user.user_id)
     }
   })
-  
+
   useEffect(() => {
     axios
       .get(`https://fazz.adaptable.app/api/v1/user/${id}`)
