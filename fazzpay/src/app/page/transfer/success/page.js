@@ -92,7 +92,7 @@ export default function Confirmation() {
               <BiDownload size={20}/> Download PDF
             </button>
             <Link
-              href='page/home'
+              href='/'
               className="button-primary mt-10"
             >
               Back Home
