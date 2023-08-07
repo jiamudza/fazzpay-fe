@@ -13,6 +13,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import {BiDownload} from "react-icons/bi"
 
 export default function Confirmation() {
+  const router = useRouter()
 
   const [userData, setUserData] = useState({})
   // const userId = pathName.split(`/page/transfer/detail/`);
@@ -30,6 +31,13 @@ export default function Confirmation() {
       setUserData(JSON.parse(sessionStorage.getItem("@session")))
     }
   })
+
+  const handleBack = (e) => {
+    e.preventDefault()
+
+    sessionStorage.removeItem('@session')
+    router.push('/')
+  }
 
   return (
     <div
@@ -92,6 +100,7 @@ export default function Confirmation() {
               <BiDownload size={20}/> Download PDF
             </button>
             <Link
+            onClick={handleBack}
               href='/'
               className="button-primary mt-10"
             >
