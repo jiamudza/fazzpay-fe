@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
 import MainMenu from "@/app/components/MainMenu";
@@ -12,18 +12,19 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 
-export default function Home() {
+import placeholder from "../../../assets/img/placeholder.jpg"
 
+export default function Home() {
   const [income, setIncome] = useState(true);
   const [user, setUser] = useState({});
   const [history, setHistory] = useState([]);
-  const [id, setId] = useState('')
+  const [id, setId] = useState("");
 
   useEffect(() => {
-    if(localStorage.getItem('@fazzLogin')) {
-      setId(JSON.parse(localStorage.getItem('@fazzLogin')).user.user_id)
+    if (localStorage.getItem("@fazzLogin")) {
+      setId(JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id);
     }
-  })
+  });
 
   useEffect(() => {
     axios
@@ -52,7 +53,7 @@ export default function Home() {
       style: "decimal",
       currency: "IDR",
     }).format(number);
-  }; 
+  };
   return (
     <div className="bg-[#e5e5e5]">
       <header className="px-10 py-6 bg-white">
@@ -145,42 +146,73 @@ export default function Home() {
                   see all
                 </p>
               </div>
-                  {income === true ? 
-                 history && history.map((item, index) => {
-                    if(item.user_id === item.sender_id && id !== item.user_id) {
-                      return(
-                        <div key={index} className="flex items-center justify-between px-5">
-                              <Image alt='user-image' src={item.user_image} width={100} height={100} className="w-10 h-10 bg-primary rounded-lg mt-5" />
-                              <div>
-                                <p className="text-sm">{`${item.first_name}`}</p>
-                                <p className="text-sm text-slate-400">
+              {income === true
+                ? history &&
+                  history.map((item, index) => {
+                    if (
+                      item.user_id === item.sender_id &&
+                      id !== item.user_id
+                    ) {
+                      return (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between px-5"
+                        >
+                          <div className="flex justify-start gap-2 items-center">
+                            <Image
+                              alt="user-image"
+                              src={item.user_image === null ? placeholder : item.user_image}
+                              width={200}
+                              height={200}
+                              className="w-10 h-10 bg-primary rounded-lg mt-5"
+                            />
+                            <div>
+                              <p className="text-sm">{`${item.first_name}`}</p>
+                              <p className="text-sm text-slate-400">
                                 {item.phone}
-                                </p>
-                              </div>
-                              <p className="font-bold text-green-500">+Rp{rupiah(item.amount)}</p>
+                              </p>
                             </div>
-                      )
+                          </div>
+                          <p className="font-bold text-green-500">
+                            +Rp{rupiah(item.amount)}
+                          </p>
+                        </div>
+                      );
                     }
                   })
-                   : 
-                  history && history.map((item, index) => {
-                    if(item.user_id === item.receiver_id && id !== item.user_id) {
-                      return(
-                        <div key={index} className="flex items-center justify-between px-5">
-                              <Image alt='user-image' src={item.user_image} width={100} height={100} className="w-10 h-10 bg-primary rounded-lg mt-5" />
-                              <div>
-                                <p className="text-sm">{`${item.first_name}`}</p>
-                                <p className="text-sm text-slate-400">
+                : history &&
+                  history.map((item, index) => {
+                    if (
+                      item.user_id === item.receiver_id &&
+                      id !== item.user_id
+                    ) {
+                      return (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between px-5"
+                        >
+                          <div className="flex justify-center content-center items-center">
+                            <Image
+                              alt="user-image"
+                              src={item.user_image === null ? placeholder : item.user_image}
+                              width={200}
+                              height={200}
+                              className="w-10 h-10 bg-primary rounded-lg mt-5"
+                            />
+                            <div>
+                              <p className="text-sm">{`${item.first_name}`}</p>
+                              <p className="text-sm text-slate-400">
                                 {item.phone}
-                                </p>
-                              </div>
-                              <p className="font-bold text-red-500">-Rp{rupiah(item.amount)}</p>
+                              </p>
                             </div>
-                      )
+                          </div>
+                          <p className="font-bold text-red-500">
+                            -Rp{rupiah(item.amount)}
+                          </p>
+                        </div>
+                      );
                     }
-                  })
-                   }
-              
+                  })}
             </div>
           </div>
         </div>
