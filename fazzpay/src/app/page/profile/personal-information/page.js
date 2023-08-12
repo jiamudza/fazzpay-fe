@@ -8,8 +8,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function PersonalInformation() {
-  const [user, setUser] = useState({});
-
+  const [user, setUser] = useState({}); 
   const router = useRouter();
 
   useEffect(() => {

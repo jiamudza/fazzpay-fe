@@ -4,7 +4,7 @@ import React from "react";
 // assets
 import phone from "../../../../assets/img/png-phone.png";
 import phone2 from "../../../../assets/img/png-phone2.png";
-import PinForm from "./form/PinForm";
+import PinForm from "./pin-form/PinForm";
 export default function Register() {
   return (
     <div className="flex max-h-screen">
@@ -37,7 +37,7 @@ export default function Register() {
         </div>
       </div>
       <div className="flex-1 px-5 mt-10">
-        <RegisterForm />
+        <PinForm />
       </div>
     </div>
   );

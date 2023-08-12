@@ -31,22 +31,16 @@ export default function RegisterForm() {
     ) {
       setRegistError(true);
     } else {
-      axios({
-        url: `${fazzPay}/auth/register`,
-        method: "POST",
-        data: registForm,
-      })
-        .then((res) => {
-          router.push("/page/auth/set-pin");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      sessionStorage.setItem('fazzRegister', JSON.stringify(registForm))
+      router.push(`/page/auth/set-pin`)
     }
   };
 
-  console.log(registForm)
-
+  useEffect(() => {
+    if(sessionStorage.getItem('fazzRegister')) {
+        router.push('/page/auth/set-pin')
+    }
+  }, [])
   return (
     <div>
       <p className="font-bold text-xl">
