@@ -40,7 +40,7 @@ export default function RegisterForm() {
     if(sessionStorage.getItem('fazzRegister')) {
         router.push('/page/auth/set-pin')
     }
-  }, [])
+  }, [router])
   return (
     <div>
       <p className="font-bold text-xl">

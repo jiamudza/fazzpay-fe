@@ -24,7 +24,7 @@ export default function Home() {
     if (localStorage.getItem("@fazzLogin")) {
       setId(JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id);
     }
-  });
+  }, []);
 
   useEffect(() => {
     axios

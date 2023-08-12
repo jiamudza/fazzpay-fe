@@ -26,7 +26,7 @@ export default function PersonalInformation() {
     } else {
       router.push("/page/login");
     }
-  }, []);
+  }, [router]);
 
   return (
     <div className="bg-[#e5e5e5]">

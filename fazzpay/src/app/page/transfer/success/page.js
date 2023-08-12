@@ -30,7 +30,7 @@ export default function Confirmation() {
     if(sessionStorage.getItem('@session')) {
       setUserData(JSON.parse(sessionStorage.getItem("@session")))
     }
-  })
+  }, [])
 
   const handleBack = (e) => {
     e.preventDefault()

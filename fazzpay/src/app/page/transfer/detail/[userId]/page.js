@@ -25,7 +25,7 @@ export default function Confirmation({ callback }) {
     } else {
       router.push(`/page/auth/login/`);
     }
-  }, []);
+  }, [router]);
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -74,7 +74,7 @@ export default function Confirmation({ callback }) {
         });
       })
       .catch((err) => err);
-  });
+  }, [user]);
 
   return (
     <div

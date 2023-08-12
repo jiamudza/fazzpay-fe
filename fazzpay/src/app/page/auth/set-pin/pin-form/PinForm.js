@@ -8,9 +8,14 @@ export default function PinForm() {
 
   const fazzPay = "https://fazz.adaptable.app/api/v1";
   const [pin, setPin] = useState([]);
-  const [register, setRegister] = useState({
-    ...JSON.parse(sessionStorage.getItem('fazzRegister'))
-  });
+  const [register, setRegister] = useState({});
+
+  useEffect(() => {
+    if(sessionStorage.getItem('fazzRegister')) {
+      setRegister(JSON.parse(sessionStorage.getItem('fazzRegister')))
+    }
+  }, [])
+
 
   const handleConfirm = (e) => {
     e.preventDefault();
