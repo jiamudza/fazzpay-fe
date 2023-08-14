@@ -8,6 +8,8 @@ import Link from "next/link";
 import Image from "next/image";
 import MainMenu from "@/app/components/MainMenu";
 
+import placeholder from "@/assets/img/placeholder.jpg"
+
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import {BiDownload} from "react-icons/bi"
 import Header from "@/app/components/Header";
@@ -50,10 +52,10 @@ export default function Confirmation() {
         <Header />
       </div>
       <main className="flex">
-        <div>
+        <div className="hidden lg:block">
           <MainMenu />
         </div>
-        <div className="m-10 p-10 rounded-xl shadow-2xl lg:w-full bg-white">
+        <div className="m-10 p-10 rounded-xl shadow-2xl w-full bg-white">
           <BsFillCheckCircleFill
             size={50}
             color={"green"}
@@ -82,7 +84,7 @@ export default function Confirmation() {
 
           <div className="mt-5 flex items-center gap-5">
             <Image
-              src={userData.image}
+              src={userData.image === null ? placeholder : userData.image}
               width={100}
               height={100}
               alt="receiver-image"
@@ -94,14 +96,14 @@ export default function Confirmation() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-3">
-            <button className="button-primary-reverse mt-10 flex gap-2">
+          <div className="flex justify-center lg:justify-end gap-3">
+            <button className="button-primary-reverse mt-10 flex gap-2 text-sm lg:text-base">
               <BiDownload size={20}/> Download PDF
             </button>
             <Link
             onClick={handleBack}
             href={'/home'}
-              className="button-primary mt-10"
+              className="button-primary text-sm lg:text-base mt-10"
             >
               Back Home
             </Link>

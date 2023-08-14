@@ -38,7 +38,9 @@ export default function page() {
             We bring you a mobile app for banking problems that <br></br>{" "}
             oftenly wasting much of your times.
           </p>
-          <Link href='/home' className="button-primary mt-10">Try it free</Link>
+          <div className="mt-5">
+          <Link href='/home' className="button-primary">Try it free</Link>
+          </div>
           <p className="text-sm mt-5">Available on:</p>
         </aside>
       </div>

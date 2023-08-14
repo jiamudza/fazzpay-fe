@@ -29,23 +29,14 @@ export default function HeaderAfterLogin() {
       <div>
         <div className="flex content-center gap-5 justify-between items-center">
           <div className="flex content-center justify-between items-center gap-3">
-            {user.user_image === null ? (
-              <Image
-                src={placeholder}
+              {user.user_image && <Image
+                src={user.user_image === null ? placeholder : user.user_image}
                 width={200}
                 height={200}
                 alt="user-image"
                 className="h-10 w-10 rounded-lg bg-primary"
-              />
-            ) : (
-              <Image
-                src={user.user_image}
-                width={200}
-                height={200}
-                alt="user-image"
-                className="h-10 w-10 rounded-lg bg-primary"
-              />
-            )}
+              />}
+           
             <div>
               <p className="font-bold">{`${user.first_name} ${user.last_name}`}</p>
               <p className="text-sm text-slate-400">{user.phone}</p>

@@ -71,7 +71,7 @@ export default function TransferAmount() {
         <Header />
       </div>
       <div className="flex">
-        <aside className="">
+        <aside className="hidden lg:block">
           <MainMenu />
         </aside>
         <div className="p-10 w-full m-10 bg-white rounded-xl shadow-xl">

@@ -38,12 +38,12 @@ export default function PinForm() {
   console.log(register);
 
   return (
-    <div className="text-nunito">
+    <div className="text-nunito text-white lg:text-black bg-primary lg:bg-white px-5 py-10 h-screen">
       <p className="font-bold text-xl">
         Secure Your Account, Your Wallet, and Your Data With 6 Digits PIN That
         You Created Yourself.
       </p>
-      <p className="mt-10 w-80 text-small text-slate-400">
+      <p className="mt-10 w-80 text-small lg:text-slate-400">
         Create 6 digits pin to secure all your money and your data in FazzPay
         app. Keep it secret and don’t tell anyone about your FazzPay account
         password and the PIN.
@@ -148,12 +148,14 @@ export default function PinForm() {
               className="w-10 h-14 text-2xl text-center text-blue-400 border-2 rounded-md border-blue-400 focus:outline-none focus:shadow-[0px_0px_8px_0px_#4fd1c5] caret-transparent"
             />
           </div>
+          <div className="flex justify-center">
           <button
             onClick={handleConfirm}
-            className="button-primary mt-10 w-full"
+            className="border border-primary lg:border-white bg-white lg:bg-primary py-2 rounded-lg font-semibold text-primary lg:text-white hover:bg-primary lg:hover:bg-white hover:border hover:border-white lg:hover:border-primary ease-in-out duration-100 hover:text-white lg:hover:text-primary active:scale-95 px-10 mt-5 text-cente"
           >
             Confirm
           </button>
+          </div>
         </div>
       </form>
     </div>

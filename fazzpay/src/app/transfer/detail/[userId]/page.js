@@ -8,6 +8,8 @@ import MainMenu from "@/app/components/MainMenu";
 import Header from "@/app/components/Header";
 import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 
+import placeholder from "../../../../assets/img/placeholder.jpg"
+
 export default function Confirmation({ callback }) {
   const router = useRouter();
   const pathName = usePathname();
@@ -76,6 +78,8 @@ export default function Confirmation({ callback }) {
       .catch((err) => err);
   }, [user]);
 
+  console.log(userData)
+
   return (
     <div
       className={
@@ -88,15 +92,15 @@ export default function Confirmation({ callback }) {
         <Header />
       </div>
       <main className="flex">
-        <div>
+        <div className="hidden lg:block">
           <MainMenu />
         </div>
-        <div className="m-10 p-10 rounded-xl shadow-2xl lg:w-full bg-white">
+        <div className="m-10 p-10 rounded-xl shadow-2xl w-full bg-white">
           <p className="font-bold">Transfer To</p>
           <div className="mt-5 flex items-center gap-5">
             {userData.image && (
               <Image
-                src={userData.image}
+                src={userData.image === null ? placeholder : userData.image}
                 width={100}
                 height={100}
                 alt="receiver-image"

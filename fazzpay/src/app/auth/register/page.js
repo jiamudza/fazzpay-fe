@@ -8,7 +8,7 @@ import RegisterForm from "./form/RegisterForm";
 export default function Register() {
   return (
     <div className="flex max-h-screen">
-      <div className="text-white p-10 bg-primary flex-1">
+      <div className="text-white p-10 bg-primary hidden lg:block flex-1">
         <h1 className="text-2xl font-bold">Fazzpay</h1>
         <div className="grid justify-items-center">
           <Image
@@ -36,7 +36,7 @@ export default function Register() {
           </p>
         </div>
       </div>
-      <div className="flex-1 px-5 mt-10">
+      <div className="flex-1">
         <RegisterForm />
       </div>
     </div>

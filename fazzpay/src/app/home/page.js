@@ -56,15 +56,15 @@ export default function Home() {
   };
   return (
     <div className="bg-[#e5e5e5]">
-      <header className="px-10 py-6 bg-white">
+      <header className="px-10 py-6 bg-white sticky top-0">
         <Header />
       </header>
       <main className="flex mb-10">
-        <div className="">
+        <div className="hidden md:block">
           <MainMenu />
         </div>
         <div id="content" className="w-full mt-10 mx-10">
-          <div className="text-white bg-primary p-5 rounded-xl flex justify-between items-center">
+          <div className="text-white bg-primary p-5 rounded-xl flex justify-between items-center px-5">
             <div>
               <p>Balance</p>
               <h3 className="text-bold text-2xl">Rp{rupiah(user.balance)}</h3>
@@ -87,7 +87,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex justify-between mt-10 gap-10">
+          <div className="lg:flex justify-between mt-10 gap-10">
             {/* traffic */}
             <div className="bg-white shadow-xl rounded-xl p-10  text-center flex-1">
               <div className="flex items-center justify-between">
@@ -113,7 +113,7 @@ export default function Home() {
             </div>
 
             {/* history */}
-            <div className="bg-white rounded-xl shadow-xl h-80 overflow-y-auto">
+            <div className="bg-white rounded-xl shadow-xl h-80 mt-10 md:mt-0 overflow-y-auto">
               <div className="flex justify-between">
                 <button
                   onClick={() => {

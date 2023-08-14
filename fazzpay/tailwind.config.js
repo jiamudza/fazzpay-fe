@@ -17,7 +17,12 @@ module.exports = {
       },
       colors: {
         primary: "#6379F4",
-        page: "#E5E5E5"
+        page: "#E5E5E5",
+        secondary: "#6A4029",
+        title: "#0B132A",
+        text: "#4F5665",
+        pale: "#EFEEEE",
+        xpale: "#BABABA"
       }
     },
   },

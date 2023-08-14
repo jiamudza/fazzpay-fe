@@ -1,4 +1,5 @@
 "use client";
+import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 import Header from "@/app/components/Header";
 import MainMenu from "@/app/components/MainMenu";
 import axios from "axios";
@@ -59,7 +60,7 @@ export default function Number() {
         <Header />
       </header>
       <main className="flex mb-10">
-        <aside>
+        <aside className="hidden lg:block">
           <MainMenu />
         </aside>
         <div className="p-10 w-full m-10 bg-white rounded-xl shadow-xl">
@@ -114,6 +115,9 @@ export default function Number() {
           </form>
         </div>
       </main>
+      <footer>
+        <FooterAfterLogin />
+      </footer>
     </div>
   );
 }

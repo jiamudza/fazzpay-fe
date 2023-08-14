@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
+import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 
 export default function PersonalInformation() {
   const [user, setUser] = useState({}); 
@@ -34,7 +35,7 @@ export default function PersonalInformation() {
         <Header />
       </header>
       <main className="flex mb-10">
-        <aside>
+        <aside className="hidden lg:block">
           <MainMenu />
         </aside>
         <div className='p-10 w-full m-10 bg-white rounded-xl shadow-2xl"'>
@@ -61,6 +62,9 @@ export default function PersonalInformation() {
           </div>
         </div>
       </main>
+      <footer>
+        <FooterAfterLogin />
+      </footer>
     </div>
   );
 }

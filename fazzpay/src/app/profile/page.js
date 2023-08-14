@@ -51,7 +51,7 @@ export default function Profile() {
         <Header />
       </header>
       <main className="flex mb-10">
-        <aside>
+        <aside className="hidden lg:block">
           <MainMenu />
         </aside>
 

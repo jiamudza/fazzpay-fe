@@ -33,8 +33,8 @@ export default function Transfer() {
       <header className="px-10 py-6 bg-white">
         <Header />
       </header>
-      <div id="content" className="w-full flex justify-center content-center">
-        <div className="">
+      <div id="content" className="w-full lg:flex justify-center px-5 content-center ">
+        <div className="hidden lg:block">
           <MainMenu />
         </div>
         <main className="w-full mt-10 bg-white p-5 rounded-lg shadow-2xl">
