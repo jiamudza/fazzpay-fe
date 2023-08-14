@@ -13,6 +13,9 @@ import axios from "axios";
 import Header from "@/app/components/Header";
 
 import placeholder from "../../assets/img/placeholder.jpg"
+import { getUserById } from "@/redux/action/user";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export default function Home() {
   const [income, setIncome] = useState(true);

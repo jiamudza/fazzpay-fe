@@ -2,12 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 import placeholder from "@/assets/img/placeholder.jpg";
-
-import { FaUserCircle} from "react-icons/fa";
-import {
-  RiLogoutCircleLine,
-  RiSettings3Fill,
-} from "react-icons/ri";
+import { RiLogoutCircleLine, RiSettings3Fill } from "react-icons/ri";
 
 import { RxDashboard } from "react-icons/rx";
 import { RxPerson } from "react-icons/rx";
@@ -19,13 +14,13 @@ import axios from "axios";
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [hamburgerMenu, setHamburgerMenu] = useState("hamburger-menu");
   const [drawerOpen, setDrawerOpen] = useState(false);
-
   const [user, setUser] = useState({});
 
   const handleLogout = (e) => {
@@ -55,9 +50,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div
-      className="font-nunito bg-white bg-opacity-90"
-    >
+    <div className="font-nunito bg-white bg-opacity-90">
       <div
         className={
           drawerOpen
@@ -87,17 +80,15 @@ const Header = () => {
             <div>
               <div className="flex content-center gap-5 justify-between items-center">
                 <div className="flex content-center justify-between items-center gap-3">
-                  {user.user_image && (
-                    <Image
-                      src={
-                        user.user_image === null ? placeholder : user.user_image
-                      }
-                      width={200}
-                      height={200}
-                      alt="user-image"
-                      className="h-10 w-10 rounded-lg bg-primary"
-                    />
-                  )}
+                  <Image
+                    src={
+                      user.user_image === null ? placeholder : user.user_image
+                    }
+                    width={200}
+                    height={200}
+                    alt="user-image"
+                    className="h-10 w-10 rounded-lg bg-primary"
+                  />
 
                   <div>
                     <p className="font-bold">{`${user.first_name} ${user.last_name}`}</p>
@@ -108,39 +99,6 @@ const Header = () => {
                   <VscBell size={20} />
                 </div>
               </div>
-
-              {isOpen && (
-                <div className="hidden absolute md:flex flex-col items-start right-20 top-20 shadow-2xl bg-white py-4 w-52 border-[1px] rounded-xl text-center text-text">
-                  <div
-                    onClick={() => navigate("/profile")}
-                    className="py-2 mx-12 flex items-center justify-around cursor-pointer"
-                  >
-                    <FaUserCircle size={25} className="text-text mx-3 " />
-                    <p>Profile</p>
-                  </div>
-                  <div
-                    onClick={() => navigate("/payment")}
-                    className="py-2 mx-12 flex items-center justify-around cursor-pointer"
-                  >
-                    <IoMdCart size={25} className="text-text mx-3" />
-                    <p>Cart</p>
-                  </div>
-                  <div
-                    onClick={() => navigate("/settings")}
-                    className="py-2 mx-12 flex items-center justify-around cursor-pointer"
-                  >
-                    <RiSettings3Fill size={25} className="text-text mx-3" />
-                    <p>Settings</p>
-                  </div>
-                  <div
-                    onClick={handleLogout}
-                    className="py-2 mx-12 flex items-center justify-around cursor-pointer"
-                  >
-                    <RiLogoutCircleLine size={25} className="text-text mx-3" />
-                    <p>Logout</p>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         ) : (
@@ -178,10 +136,10 @@ const Header = () => {
                 <HiOutlineArrowLeft color="white" size={30} />
               </div>
               <div
-                onClick={() => navigate("/profile")}
+                onClick={() => router.push("/profile")}
                 className="cursor-pointer flex flex-col items-center mx-20 py-5 text-white"
               >
-                <img
+                <Image
                   className="w-28 h-28 rounded-full"
                   src={user.user_image !== null ? user.user_image : placeholder}
                   alt="user-profile"
@@ -197,14 +155,14 @@ const Header = () => {
 
             {/* drawer down */}
             <div
-              onClick={() => navigate("/home")}
+              onClick={() => router.push("/home")}
               className="py-5 px-20 flex items-center justify-arounf cursor-pointer border-b hover:text-primary"
             >
               <RxDashboard size={25} className="text-text mx-3 " />
               <p>Dashboard</p>
             </div>
             <div
-              onClick={() => navigate("/transfer")}
+              onClick={() => router.push("/transfer")}
               className="py-5 px-20 flex items-center justify-around cursor-pointer border-b hover:text-primary"
             >
               <AiOutlineArrowUp size={25} className="text-text mx-3" />
@@ -218,7 +176,7 @@ const Header = () => {
               <p>Topup</p>
             </div>
             <div
-              onClick={() => navigate("/profile")}
+              onClick={() => router.push("/profile")}
               className="py-5 px-20 flex items-center justify-around cursor-pointer hover:text-primary"
             >
               <RxPerson size={25} className="text-text mx-3" />
@@ -235,9 +193,9 @@ const Header = () => {
         ) : (
           <div>
             <div className=" flex justify-between px-5 items-center w-full rounded-r-xl">
-            <Link href="/" className="lg:flex items-center font-bold">
-              <p className="font-bold text-2xl text-primary">Fazzpay</p>
-            </Link>
+              <Link href="/" className="lg:flex items-center font-bold">
+                <p className="font-bold text-2xl text-primary">Fazzpay</p>
+              </Link>
               <div
                 onClick={() => {
                   setDrawerOpen(!drawerOpen);
@@ -248,21 +206,20 @@ const Header = () => {
                 <HiOutlineArrowLeft className="text-primary" size={30} />
               </div>
             </div>
-            
+
             <div className="w-full cursor-pointer flex justify-center gap-3 px-10 mt-10">
-            
-            <Link
-              href="/auth/login"
-              className="border bg-primary px-6 py-2 rounded-xl font-semibold text-white hover:bg-white hover:border hover:border-primary ease-in-out duration-100 hover:text-primary mx-2 active:scale-95"
-            >
-              Login
-            </Link>
-            <Link
-              href="/auth/register"
-              className="border border-primary bg-white px-6 py-2 rounded-xl font-semibold text-primary hover:bg-white hover:border hover:border-primary ease-in-out duration-100 hover:text-primary mx-2 active:scale-95"
-            >
-              Sign Up
-            </Link>
+              <Link
+                href="/auth/login"
+                className="border bg-primary px-6 py-2 rounded-xl font-semibold text-white hover:bg-white hover:border hover:border-primary ease-in-out duration-100 hover:text-primary mx-2 active:scale-95"
+              >
+                Login
+              </Link>
+              <Link
+                href="/auth/register"
+                className="border border-primary bg-white px-6 py-2 rounded-xl font-semibold text-primary hover:bg-white hover:border hover:border-primary ease-in-out duration-100 hover:text-primary mx-2 active:scale-95"
+              >
+                Sign Up
+              </Link>
             </div>
           </div>
         )}

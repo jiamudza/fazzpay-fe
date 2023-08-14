@@ -10,6 +10,7 @@ import { BsArrowRight } from "react-icons/bs";
 
 import placeholder from '../../assets/img/placeholder.jpg'
 import Header from "@/app/components/Header";
+import FooterAfterLogin from "../components/FooterAfterLogin";
 export default function Profile() {
   const [user, setUser] = useState({});
 
@@ -113,6 +114,9 @@ export default function Profile() {
           </div>
         </div>
       </main>
+      <footer>
+        <FooterAfterLogin />
+      </footer>
     </div>
   );
 }
