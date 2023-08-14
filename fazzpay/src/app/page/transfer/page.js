@@ -46,8 +46,9 @@ export default function Transfer() {
           />
 
           {users.data && users.data.map((item, index) => {
-            return (
-              <Link key={index}
+            if(item.user_id != JSON.parse(localStorage.getItem('@fazzLogin')).user.user_id) {
+              return (
+                <Link key={index}
                 href={`/page/transfer/${item.user_id}`}
                 className="flex m-4 gap-4 cursor-pointer"
               >
@@ -63,14 +64,15 @@ export default function Transfer() {
                   height={200}
                   priority
                 />
-                <div>
+                <div className="flex flex-col gap-2 justify-center">
                   <p className="font-bold">{`${item.first_name} ${item.last_name}`}</p>
-                  <p className="text-xs text-slate-400 mt-4">
+                  <p className="text-xs text-slate-400">
                     {item.phone === null ? "-" : item.phone}
                   </p>
                 </div>
               </Link>
-            );
+              )
+            }
           })}
         </main>
       </div>
