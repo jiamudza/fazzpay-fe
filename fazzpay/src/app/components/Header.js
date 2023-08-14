@@ -11,7 +11,7 @@ useEffect(() => {
     if(localStorage.getItem('@fazzLogin')) {
         setLogin(true)
     } else setLogin(false)
-})
+}, [])
   return (
     <div>
         {login === true ? <div><HeaderAfterLogin /></div> : <div><HeaderBeforeLogin /></div>}

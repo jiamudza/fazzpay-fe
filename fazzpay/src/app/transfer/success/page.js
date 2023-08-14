@@ -1,6 +1,5 @@
 "use client";
-import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
-import Footer from "@/components/footer/Footer";
+import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -11,6 +10,7 @@ import MainMenu from "@/app/components/MainMenu";
 
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import {BiDownload} from "react-icons/bi"
+import Header from "@/app/components/Header";
 
 export default function Confirmation() {
   const router = useRouter()
@@ -109,7 +109,7 @@ export default function Confirmation() {
         </div>
       </main>
       <div>
-        <Footer />
+        <FooterAfterLogin />
       </div>
     </div>
   );

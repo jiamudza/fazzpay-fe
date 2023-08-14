@@ -2,8 +2,8 @@ import Image from "next/image";
 import React from "react";
 
 // assets
-import phone from "../../../../assets/img/png-phone.png";
-import phone2 from "../../../../assets/img/png-phone2.png";
+import phone from "../../../assets/img/png-phone.png";
+import phone2 from "../../../assets/img/png-phone2.png";
 import RegisterForm from "./form/RegisterForm";
 export default function Register() {
   return (
