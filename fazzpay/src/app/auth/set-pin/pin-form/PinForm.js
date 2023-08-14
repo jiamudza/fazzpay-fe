@@ -29,7 +29,7 @@ export default function PinForm() {
       }
     })
     .then(res => {
-        router.push('/page/auth/login')
+        router.push('/auth/login')
         sessionStorage.removeItem('fazzRegister')
     })
     .catch(err => console.log(err))

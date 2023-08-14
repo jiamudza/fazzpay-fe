@@ -16,7 +16,6 @@ export default function Confirmation() {
   const router = useRouter()
 
   const [userData, setUserData] = useState({})
-  // const userId = pathName.split(`/page/transfer/detail/`);
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -36,7 +35,7 @@ export default function Confirmation() {
     e.preventDefault()
 
     sessionStorage.removeItem('@session')
-    router.push('/page/home')
+    router.push('/home')
   }
 
   return (
@@ -101,7 +100,7 @@ export default function Confirmation() {
             </button>
             <Link
             onClick={handleBack}
-            href={'/page/home'}
+            href={'/home'}
               className="button-primary mt-10"
             >
               Back Home

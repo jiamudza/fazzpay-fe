@@ -12,7 +12,7 @@ import Image from "next/image";
 import axios from "axios";
 import Header from "@/app/components/Header";
 
-import placeholder from "../../../assets/img/placeholder.jpg"
+import placeholder from "../../assets/img/placeholder.jpg"
 
 export default function Home() {
   const [income, setIncome] = useState(true);
@@ -74,13 +74,13 @@ export default function Home() {
             <div>
               <button className=" bg-slate-200 w-32 bg-opacity-60 outline outline-white rounded-lg flex justify-between gap-2 py-2 px-3 outline-1 hover:bg-blue-300 active:scale-95 duration-200 ease-in-out">
                 <AiOutlineArrowUp size={25} className="text-slate-500" />
-                <Link href="/page/transfer" className="font-bold">
+                <Link href="/transfer" className="font-bold">
                   Transfer
                 </Link>
               </button>
               <button className=" bg-slate-200 w-32 bg-opacity-60 outline outline-white rounded-lg flex justify-between gap-2 py-2 px-3 outline-1 hover:bg-blue-300 active:scale-95 duration-200 ease-in-out mt-5">
                 <AiOutlinePlus size={25} className="text-slate-500" />
-                <Link href="/page/topup" className="font-bold">
+                <Link href="/topup" className="font-bold">
                   Top Up
                 </Link>
               </button>

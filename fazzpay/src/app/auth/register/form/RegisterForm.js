@@ -32,13 +32,13 @@ export default function RegisterForm() {
       setRegistError(true);
     } else {
       sessionStorage.setItem('fazzRegister', JSON.stringify(registForm))
-      router.push(`/page/auth/set-pin`)
+      router.push(`/auth/set-pin`)
     }
   };
 
   useEffect(() => {
     if(sessionStorage.getItem('fazzRegister')) {
-        router.push('/page/auth/set-pin')
+        router.push('/auth/set-pin')
     }
   }, [router])
   return (

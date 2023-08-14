@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Placeholder from "../../../assets/img/placeholder.jpg";
+import Placeholder from "../../assets/img/placeholder.jpg";
 import MainMenu from "@/app/components/MainMenu";
 import Link from "next/link";
 import Header from "@/app/components/Header";
@@ -49,7 +49,7 @@ export default function Transfer() {
             if(item.user_id != JSON.parse(localStorage.getItem('@fazzLogin')).user.user_id) {
               return (
                 <Link key={index}
-                href={`/page/transfer/${item.user_id}`}
+                href={`/transfer/${item.user_id}`}
                 className="flex m-4 gap-4 cursor-pointer"
               >
                <Image

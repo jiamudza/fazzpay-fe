@@ -31,7 +31,7 @@ export default function LoginForm() {
         })
         .then(res => {
             localStorage.setItem('@fazzLogin', JSON.stringify(res.data.data))
-            router.push('/page/home')
+            router.push('/home')
         })
         .catch(err => {
             setLoginError({
@@ -49,7 +49,7 @@ export default function LoginForm() {
     }
 
     useEffect(() => {
-        if(localStorage.getItem('@fazzLogin')) router.push('/page/home')
+        if(localStorage.getItem('@fazzLogin')) router.push('/home')
     })
 
 

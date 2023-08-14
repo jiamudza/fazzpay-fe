@@ -1,5 +1,4 @@
 "use client";
-import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
 import MainMenu from "@/app/components/MainMenu";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -9,7 +8,7 @@ import Link from "next/link";
 import { RxPencil1 } from "react-icons/rx";
 import { BsArrowRight } from "react-icons/bs";
 
-import placeholder from '../../../assets/img/placeholder.jpg'
+import placeholder from '../../assets/img/placeholder.jpg'
 import Header from "@/app/components/Header";
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -93,15 +92,15 @@ export default function Profile() {
           <p className="text-sm text-slate-400">{user.phone}</p>
 
           <div className="mt-4">
-            <Link href="/page/profile/personal-information" className="font-bold text-sm mt-2 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
+            <Link href="profile/personal-information" className="font-bold text-sm mt-2 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
               Personal Information
               <BsArrowRight size={20} />
             </Link>
-            <Link href="/page/profile/change-password" className="font-bold text-sm mt-4 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
+            <Link href="profile/change-password" className="font-bold text-sm mt-4 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
               Change Password
               <BsArrowRight size={20} />
             </Link>
-            <Link href="/page/profile/change-pin" className="font-bold text-sm mt-4 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
+            <Link href="profile/change-pin" className="font-bold text-sm mt-4 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
               Change PIN
               <BsArrowRight size={20} />
             </Link>

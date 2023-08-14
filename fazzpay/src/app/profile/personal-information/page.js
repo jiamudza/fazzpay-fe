@@ -24,7 +24,7 @@ export default function PersonalInformation() {
         })
         .catch((err) => console.log(err));
     } else {
-      router.push("/page/login");
+      router.push("/login");
     }
   }, [router]);
 
@@ -56,7 +56,7 @@ export default function PersonalInformation() {
                 <p className="text-sm mt-4 text-slate-400">Phone Number</p>
                 <p className="font-bold mt-2">{user.phone}</p>
               </div>
-              <Link href="/page/profile/personal-information/number" className="text-primary text-sm font-bold">Manage</Link>
+              <Link href="/profile/personal-information/number" className="text-primary text-sm font-bold">Manage</Link>
             </div>
           </div>
         </div>

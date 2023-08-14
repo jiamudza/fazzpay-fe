@@ -48,7 +48,7 @@ export default function Number() {
       data: number,
     })
       .then((res) => {
-        route.push(`/page/profile/personal-information`)
+        route.push(`/profile/personal-information`)
       })
       .catch((err) => console.log(err));
   };

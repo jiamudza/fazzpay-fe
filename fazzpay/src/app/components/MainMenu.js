@@ -75,7 +75,7 @@ export default function MainMenu() {
         }
       >
         <RxDashboard size={20} />
-        <Link href="/page/home">Dashboard</Link>
+        <Link href="/home">Dashboard</Link>
       </div>
       <div
         className={
@@ -85,7 +85,7 @@ export default function MainMenu() {
         }
       >
         <AiOutlineArrowUp size={20} />
-        <Link href="/page/transfer">Transfer</Link>
+        <Link href="/transfer">Transfer</Link>
       </div>
       <div
         onClick={() => {
@@ -108,7 +108,7 @@ export default function MainMenu() {
         }
       >
         <RxPerson size={20} />
-        <Link href="/page/profile">Profile</Link>
+        <Link href="/profile">Profile</Link>
       </div>
       <div
         onClick={(e) => {

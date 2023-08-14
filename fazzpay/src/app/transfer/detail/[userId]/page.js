@@ -17,13 +17,13 @@ export default function Confirmation({ callback }) {
   const [pin, setPin] = useState([]);
 
   const [userData, setUserData] = useState({});
-  const userId = pathName.split(`/page/transfer/detail/`);
+  const userId = pathName.split(`/transfer/detail/`);
 
   useEffect(() => {
     if (localStorage.getItem("@fazzLogin")) {
       setUserData(JSON.parse(sessionStorage.getItem("@session")));
     } else {
-      router.push(`/page/auth/login/`);
+      router.push(`/auth/login/`);
     }
   }, [router]);
 
@@ -51,7 +51,7 @@ export default function Confirmation({ callback }) {
       .catch(err => {
         `ini ${err}`
       });
-      router.push(`/page/transfer/success/`);
+      router.push(`/transfer/success/`);
     } else if (parseInt(pin) !== parseInt(user.data.pin))
       alert("your pin is not valid");
     else if (userData.amount > user.data.balance)

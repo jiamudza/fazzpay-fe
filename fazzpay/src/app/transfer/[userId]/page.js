@@ -10,7 +10,7 @@ import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 
 export default function TransferAmount() {
   const pathName = usePathname();
-  const userId = pathName.split("/page/transfer/");
+  const userId = pathName.split("/transfer/");
   const router = useRouter();
   const [data, setData] = useState({});
   const [user, setUser] = useState({});
@@ -53,7 +53,7 @@ export default function TransferAmount() {
   const handelPayment = (e) => {
     e.preventDefault();
     sessionStorage.setItem('@session', JSON.stringify(paymentDetail))
-    router.push(`/page/transfer/detail/${userId[1]}`)
+    router.push(`/transfer/detail/${userId[1]}`)
   };
 
   useEffect(() => {

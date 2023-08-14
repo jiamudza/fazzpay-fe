@@ -13,6 +13,7 @@ import Image from "next/image";
 import { AiOutlinePhone } from "react-icons/ai";
 import { FiLock } from "react-icons/fi";
 import { TbDownload } from "react-icons/tb";
+import Link from "next/link";
 
 // Component
 import Footer from "./components/Footer";
@@ -37,7 +38,7 @@ export default function page() {
             We bring you a mobile app for banking problems that <br></br>{" "}
             oftenly wasting much of your times.
           </p>
-          <button className="button-primary mt-10">Try it free</button>
+          <Link href='/home' className="button-primary mt-10">Try it free</Link>
           <p className="text-sm mt-5">Available on:</p>
         </aside>
       </div>
