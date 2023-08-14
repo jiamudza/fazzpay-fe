@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import axios from "axios";
-import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
-import Footer from "@/components/footer/Footer";
 import Image from "next/image";
 import MainMenu from "@/app/components/MainMenu";
 import { TbRuler } from "react-icons/tb";
+import Header from "@/app/components/Header";
+import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 
 export default function TransferAmount() {
   const pathName = usePathname();
@@ -68,7 +68,7 @@ export default function TransferAmount() {
   return (
     <div className="bg-[#e5e5e5]">
       <div className="px-10 py-6 bg-white">
-        <HeaderAfterLogin />
+        <Header />
       </div>
       <div className="flex">
         <aside className="">
@@ -167,7 +167,7 @@ export default function TransferAmount() {
         </div>
       </div>
       <div className="mt-20">
-        <Footer />
+        <FooterAfterLogin />
       </div>
     </div>
   );

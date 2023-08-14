@@ -1,12 +1,12 @@
 "use client";
-import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
-import Footer from "@/components/footer/Footer";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import Image from "next/image";
 import MainMenu from "@/app/components/MainMenu";
+import Header from "@/app/components/Header";
+import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 
 export default function Confirmation({ callback }) {
   const router = useRouter();
@@ -85,7 +85,7 @@ export default function Confirmation({ callback }) {
       }
     >
       <div className="px-10 py-6 bg-white">
-        <HeaderAfterLogin />
+        <Header />
       </div>
       <main className="flex">
         <div>
@@ -261,7 +261,7 @@ export default function Confirmation({ callback }) {
         </div>
       </main>
       <div>
-        <Footer />
+        <FooterAfterLogin />
       </div>
     </div>
   );

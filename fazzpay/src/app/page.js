@@ -1,6 +1,3 @@
-// Components
-import HeaderLogin from "@/components/header/HeaderLogin";
-
 // Assets
 import phoneImage from "../assets/img/png-phone.png";
 import phoneImage2 from "../assets/img/png-phone2.png";
@@ -16,13 +13,16 @@ import Image from "next/image";
 import { AiOutlinePhone } from "react-icons/ai";
 import { FiLock } from "react-icons/fi";
 import { TbDownload } from "react-icons/tb";
-import Footer from "@/components/footer/Footer";
+
+// Component
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 export default function page() {
   return (
-    <div className="mt-10 mb-10">
-      <header className="w-full">
-        <HeaderLogin />
+    <div className="mb-10">
+      <header className="px-10 py-6 bg-white">
+        <Header />
       </header>
 
       {/* //////////////////JUMBOTRON///////////////////// */}

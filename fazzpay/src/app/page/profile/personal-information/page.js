@@ -1,6 +1,6 @@
 "use client";
-import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
 import MainMenu from "@/app/components/MainMenu";
+import Header from "@/app/components/Header";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -31,7 +31,7 @@ export default function PersonalInformation() {
   return (
     <div className="bg-[#e5e5e5]">
       <header className="px-10 py-6 bg-white">
-        <HeaderAfterLogin />
+        <Header />
       </header>
       <main className="flex mb-10">
         <aside>

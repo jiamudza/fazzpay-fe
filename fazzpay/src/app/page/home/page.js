@@ -1,6 +1,5 @@
 "use client";
 import FooterAfterLogin from "@/app/components/FooterAfterLogin";
-import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
 import MainMenu from "@/app/components/MainMenu";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -11,6 +10,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
+import Header from "@/app/components/Header";
 
 import placeholder from "../../../assets/img/placeholder.jpg"
 
@@ -57,7 +57,7 @@ export default function Home() {
   return (
     <div className="bg-[#e5e5e5]">
       <header className="px-10 py-6 bg-white">
-        <HeaderAfterLogin />
+        <Header />
       </header>
       <main className="flex mb-10">
         <div className="">

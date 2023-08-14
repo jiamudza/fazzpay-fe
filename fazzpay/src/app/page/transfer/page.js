@@ -4,10 +4,9 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Placeholder from "../../../assets/img/placeholder.jpg";
 import MainMenu from "@/app/components/MainMenu";
-import HeaderAfterLogin from "@/app/components/HeaderAfterLogin";
-import Footer from "@/components/footer/Footer";
-
 import Link from "next/link";
+import Header from "@/app/components/Header";
+import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 
 export default function Transfer() {
   const [users, setUsers] = useState({
@@ -32,7 +31,7 @@ export default function Transfer() {
   return (
     <div className="font-nunito bg-[#e5e5e5] h-full">
       <header className="px-10 py-6 bg-white">
-        <HeaderAfterLogin />
+        <Header />
       </header>
       <div id="content" className="w-full flex justify-center content-center">
         <div className="">
@@ -76,7 +75,7 @@ export default function Transfer() {
         </main>
       </div>
       <div className="mt-20">
-        <Footer />
+        <FooterAfterLogin />
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ export default function Confirmation() {
       }
     >
       <div className="px-10 py-6 bg-white">
-        <HeaderAfterLogin />
+        <Header />
       </div>
       <main className="flex">
         <div>

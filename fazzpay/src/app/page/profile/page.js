@@ -10,6 +10,7 @@ import { RxPencil1 } from "react-icons/rx";
 import { BsArrowRight } from "react-icons/bs";
 
 import placeholder from '../../../assets/img/placeholder.jpg'
+import Header from "@/app/components/Header";
 export default function Profile() {
   const [user, setUser] = useState({});
 
@@ -48,7 +49,7 @@ export default function Profile() {
   return (
     <div className="bg-[#e5e5e5] font-nunito">
       <header className="px-10 py-6 bg-white">
-        <HeaderAfterLogin />
+        <Header />
       </header>
       <main className="flex mb-10">
         <aside>
