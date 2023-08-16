@@ -25,7 +25,7 @@ export const getAllUser = (search, page) => {
     dispatch(getAllUserRequest(search, page));
     try {
       const res = await axios
-        .get(`https://fazz.adaptable.app/api/v1/user?limit=3&search=${search}&page=${page}`);
+        .get(`https://fazz.adaptable.app/api/v1/user?limit=5&search=${search}&page=${page}`);
       dispatch(getAllUserSuccess(res.data.data));
     } catch (err) {
       dispatch(getAllUserFail(err.response.data));

@@ -19,7 +19,7 @@ import Link from "next/link";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
-export default function page() {
+export default function Dashboard() {
   return (
     <div className="mb-10">
       <header className="px-10 py-6 bg-white">

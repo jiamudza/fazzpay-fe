@@ -9,18 +9,17 @@ import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUser } from "@/redux/action/user";
 import { useState } from "react";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 export default function Transfer() {
   // get all user data
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.userData);
-  const [search, setSearch] = useState("")
-  const [page, setPage] = useState(1)
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   useEffect(() => {
     dispatch(getAllUser(search, page));
   }, [search, page]);
-
-  console.log(data)
 
   return (
     <div className="font-nunito bg-[#e5e5e5] h-full">
@@ -34,19 +33,20 @@ export default function Transfer() {
         <div className="hidden lg:block">
           <MainMenu />
         </div>
-        <main className="w-full mt-10 bg-white p-5 rounded-lg shadow-2xl">
+        <main className="w-full relative mt-10 bg-white p-5 rounded-lg shadow-2xl">
           <p className="text-xl font-bold">Search Receiver</p>
+          <p>{page}</p>
           <input
-          onChange={(e) => {
-            setSearch(e.target.value)
-          }}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
             type="text"
             className="bg-slate-300 mt-5 rounded-lg p-2 w-full"
             placeholder="search receiver here"
           />
 
-          {data &&
-            data.map((item, index) => {
+          {data.data &&
+            data.data.map((item, index) => {
               if (
                 item.user_id !=
                 JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id
@@ -79,6 +79,40 @@ export default function Transfer() {
                 );
               }
             })}
+          {/* pagination */}
+          <div className="absolute bottom-10 flex justify-center gap-2 w-full items-center">
+            <div className="bg-white relative text-primary border-2 border-primary h-6 w-6 rounded-full">
+              <AiOutlineLeft onClick={() => {
+                page === 1 ? setPage(1) : setPage(page -1)
+              }} className="inset-center" />
+            </div>
+            <div className={(page >= 4 ? "block" : "hidden") + " bg-primary relative text-white h-8 w-8 rounded-full"}>
+              <p className="inset-center">1</p>
+            </div>
+            <div className={(page >= 3 ? "block" : "hidden") + " bg-primary relative text-white h-8 w-8 rounded-full"}>
+              <p className="inset-center">{page === 3 ? 1 : "..."}</p>
+            </div>
+            <div className="bg-primary relative text-white h-8 w-8 rounded-full">
+              <p className="inset-center">{page === 1 ? page : page - 1}</p>
+            </div>
+            <div className="bg-primary relative text-white h-8 w-8 rounded-full">
+              <p className="inset-center">{page === 1 ? page + 1 : page}</p>
+            </div>
+            <div className="bg-primary relative text-white h-8 w-8 rounded-full">
+              <p className="inset-center">{page === 1 ? page + 2 : page + 1}</p>
+            </div>
+            <div className={(data.count < 7 ? "hidden" : "block") + " bg-primary relative text-white h-8 w-8 rounded-full"}>
+              <p className="inset-center">{"..."}</p>
+            </div>
+            <div className={(data.count < 9 ? "hidden" : "block") + " bg-primary relative text-white h-8 w-8 rounded-full"}>
+              <p className="inset-center">{data.count/1}</p>
+            </div>
+            <div className="bg-white relative text-primary border-2 border-primary h-6 w-6 rounded-full">
+              <AiOutlineRight onClick={() => {
+                setPage(page + 1)
+              }} className="inset-center" />
+            </div>
+          </div>
         </main>
       </div>
       <div className="mt-20">
