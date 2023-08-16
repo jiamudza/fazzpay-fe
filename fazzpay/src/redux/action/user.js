@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getAllUserRequest = () => {
+const getAllUserRequest = (search, page) => {
   return {
     type: "GET_ALL_DATA_USER_REQUEST",
   };
@@ -20,12 +20,12 @@ const getAllUserFail = (err) => {
   };
 };
 
-export const getAllUser = () => {
+export const getAllUser = (search, page) => {
   return async (dispatch) => {
-    dispatch(getAllUserRequest());
+    dispatch(getAllUserRequest(search, page));
     try {
       const res = await axios
-        .get(`https://fazz.adaptable.app/api/v1/user`);
+        .get(`https://fazz.adaptable.app/api/v1/user?limit=3&search=${search}&page=${page}`);
       dispatch(getAllUserSuccess(res.data.data));
     } catch (err) {
       dispatch(getAllUserFail(err.response.data));

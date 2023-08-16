@@ -8,14 +8,19 @@ import Header from "@/app/components/Header";
 import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUser } from "@/redux/action/user";
+import { useState } from "react";
 
 export default function Transfer() {
   // get all user data
-  const { data } = useSelector((state) => state.userData);
   const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.userData);
+  const [search, setSearch] = useState("")
+  const [page, setPage] = useState(1)
   useEffect(() => {
-    dispatch(getAllUser());
-  }, []);
+    dispatch(getAllUser(search, page));
+  }, [search, page]);
+
+  console.log(data)
 
   return (
     <div className="font-nunito bg-[#e5e5e5] h-full">
@@ -32,6 +37,9 @@ export default function Transfer() {
         <main className="w-full mt-10 bg-white p-5 rounded-lg shadow-2xl">
           <p className="text-xl font-bold">Search Receiver</p>
           <input
+          onChange={(e) => {
+            setSearch(e.target.value)
+          }}
             type="text"
             className="bg-slate-300 mt-5 rounded-lg p-2 w-full"
             placeholder="search receiver here"
