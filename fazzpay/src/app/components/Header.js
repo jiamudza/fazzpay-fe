@@ -15,35 +15,28 @@ import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserById } from "@/redux/action/userById";
 
 const Header = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [hamburgerMenu, setHamburgerMenu] = useState("hamburger-menu");
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [user, setUser] = useState({});
 
   const handleLogout = (e) => {
     e.preventDefault();
-
     localStorage.removeItem("@fazzLogin");
-
     setIsLogin(false);
   };
 
-  const [search, setSearch] = useState("");
-
+  const {data} = useSelector(state => state.userDataById)
+  const dispatch = useDispatch()
   useEffect(() => {
     if (localStorage.getItem("@fazzLogin")) {
-      const userId = JSON.parse(localStorage.getItem("@fazzLogin")).user
-        .user_id;
+      const userId = JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id;
       setIsLogin(true);
-      axios
-        .get(`https://fazz.adaptable.app/api/v1/user/${userId}`)
-        .then((res) => {
-          setUser(res.data.data);
-        })
-        .catch((err) => console.log(err.response.data));
+      dispatch(getUserById(userId))
     } else {
       setIsLogin(false);
     }
@@ -80,19 +73,17 @@ const Header = () => {
             <div>
               <div className="flex content-center gap-5 justify-between items-center">
                 <div className="flex content-center justify-between items-center gap-3">
-                  <Image
-                    src={
-                      user.user_image === null ? placeholder : user.user_image
-                    }
-                    width={200}
-                    height={200}
+                  {data.user_image && <Image
+                    src={data.user_image === null ? placeholder : data.user_image}
+                    width={50}
+                    height={50}
                     alt="user-image"
-                    className="h-10 w-10 rounded-lg bg-primary"
-                  />
+                    className="h-10 w-10 rounded-lg bg-primary object-cover"
+                  />}
 
                   <div>
-                    <p className="font-bold">{`${user.first_name} ${user.last_name}`}</p>
-                    <p className="text-sm text-slate-400">{user.phone}</p>
+                    <p className="font-bold">{`${data.first_name} ${data.last_name}`}</p>
+                    <p className="text-sm text-slate-400">{data.phone}</p>
                   </div>
                 </div>
                 <div>
@@ -139,17 +130,19 @@ const Header = () => {
                 onClick={() => router.push("/profile")}
                 className="cursor-pointer flex flex-col items-center mx-20 py-5 text-white"
               >
-                <Image
-                  className="w-28 h-28 rounded-full"
-                  src={user.user_image !== null ? user.user_image : placeholder}
+                {data.user_image && <Image
+                  width={500}
+                  height={500}
+                  className="w-28 h-28 rounded-full object-cover bg-white object-center"
+                  src={data.user_image !== null ? data.user_image : placeholder}
                   alt="user-profile"
-                />
+                />}
                 <p className="font-bold py-3">
                   {isLogin
-                    ? user.first_name + " " + user.last_name
+                    ? data.first_name + " " + data.last_name
                     : "Anonimous"}
                 </p>
-                <p>{isLogin ? user.email : "Anonimous"}</p>
+                <p>{isLogin ? data.email : "Anonimous"}</p>
               </div>
             </div>
 

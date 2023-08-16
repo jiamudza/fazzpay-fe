@@ -8,7 +8,7 @@ import MainMenu from "@/app/components/MainMenu";
 import Header from "@/app/components/Header";
 import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 
-import placeholder from "../../../../assets/img/placeholder.jpg"
+import placeholder from "../../../../assets/img/placeholder.jpg";
 
 export default function Confirmation({ callback }) {
   const router = useRouter();
@@ -42,19 +42,21 @@ export default function Confirmation({ callback }) {
     if (pinBox === false) setPinBox(true);
     if (pinBox === true) setPinBox(false);
   };
+
   const handleConfirm = (e) => {
     e.preventDefault();
     if (parseInt(pin) === parseInt(user.data.pin)) {
-      axios.post(`https://fazz.adaptable.app/api/v1/transaction/`, {
-        senderId: JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id,
-        receiverId: userId[1],
-        amount: parseInt(userData.amount),
-      })
-      .catch(err => {
-        `ini ${err}`
-      });
+      axios
+        .post(`https://fazz.adaptable.app/api/v1/transaction/`, {
+          senderId: JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id,
+          receiverId: userId[1],
+          amount: parseInt(userData.amount),
+        })
+        .catch((err) => {
+          `ini ${err}`;
+        });
       router.push(`/transfer/success/`);
-    } else if (parseInt(pin) !== parseInt(user.data.pin))
+    } else if (parseInt(pin) != parseInt(user.data.pin))
       alert("your pin is not valid");
     else if (userData.amount > user.data.balance)
       alert("you dont have enough balance on your wallet");
@@ -78,7 +80,7 @@ export default function Confirmation({ callback }) {
       .catch((err) => err);
   }, [user]);
 
-  console.log(userData)
+  console.log(userData);
 
   return (
     <div

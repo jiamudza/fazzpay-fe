@@ -58,23 +58,15 @@ export default function Profile() {
 
         {/* main content */}
         <div className="flex flex-col content-center items-center p-10 w-full m-10 bg-white rounded-xl shadow-xl">
-        {user.user_image === null ? (
+
+
               <Image
-                src={placeholder}
-                width={200}
-                height={200}
+                src={user.user_image === null ? placeholder : user.user_image}
+                width={1200}
+                height={1200}
                 alt="user-image"
-                className="h-20 w-20 rounded-lg bg-primary"
-              />
-            ) : (
-              <Image
-                src={user.user_image}
-                width={200}
-                height={200}
-                alt="user-image"
-                className="h-20 w-20 rounded-lg bg-primary"
-              />
-            )}
+                className="h-20 w-20 rounded-lg bg-transparent object-cover"
+                />
           <label
             htmlFor="userImage"
             className="text-sm text-slate-400 flex content-center justify-center items-center gap-1 cursor-pointer"

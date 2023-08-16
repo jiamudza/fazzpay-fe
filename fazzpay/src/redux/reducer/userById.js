@@ -1,24 +1,24 @@
-const initialState = { loading: false, data: [], error: [] };
+const initialState = { loading: false, data: {}, error: [] };
 
- const userReducer = (state = initialState, action = {}) => {
+const userIdReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case "GET_ALL_DATA_USER_REQUEST":
+    case "GET_DATA_USER_BY_ID_REQUEST":
       return {
         ...state,
         loading: true,
       };
-    case "GET_ALL_DATA_USER_SUCCESS":
+    case "GET_DATA_USER_BY_ID_SUCCESS":
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
-    case "GET_ALL_DATA_USER_FAIL":
+    case "GET_DATA_USER_BY_ID_FAIL":
       return {
         ...state,
         loading: true,
         data: [],
-        error: action.payload
+        error: action.payload,
       };
     default:
       return {
@@ -27,4 +27,4 @@ const initialState = { loading: false, data: [], error: [] };
   }
 };
 
-export default userReducer
+export default userIdReducer

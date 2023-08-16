@@ -1,7 +1,6 @@
 "use client";
 import FooterAfterLogin from "@/app/components/FooterAfterLogin";
 import MainMenu from "@/app/components/MainMenu";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 //icons
@@ -13,50 +12,39 @@ import axios from "axios";
 import Header from "@/app/components/Header";
 
 import placeholder from "../../assets/img/placeholder.jpg"
-import { getUserById } from "@/redux/action/user";
+import { getUserById } from "@/redux/action/userById";
 import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { getHistoryById } from "@/redux/action/history";
+import { rupiah } from "@/utils/balanceFormat";
 
 
 export default function Home() {
   const [income, setIncome] = useState(true);
-  const [user, setUser] = useState({});
-  const [history, setHistory] = useState([]);
-  const [id, setId] = useState("");
 
+  // get id  by localStorage
+  const [id, setId] = useState("");
   useEffect(() => {
     if (localStorage.getItem("@fazzLogin")) {
       setId(JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id);
     }
   }, []);
 
+  // get data user by id
+  const { data } = useSelector((state) => state.userDataById)
+  const dispatch = useDispatch()
   useEffect(() => {
-    axios
-      .get(`https://fazz.adaptable.app/api/v1/user/${id}`)
-      .then((res) => {
-        setUser(res.data.data);
-      })
-      .catch((err) => {
-        err;
-      });
-  });
+    dispatch(getUserById(id))
+  }, [id])
 
+  // get transaction history by id
+  const { history } = useSelector(state => state.historyById)
   useEffect(() => {
-    axios
-      .get(`https://fazz.adaptable.app/api/v1/transaction/${id}`)
-      .then((res) => {
-        setHistory(res.data.data);
-      })
-      .catch((err) => {
-        err;
-      });
+    dispatch(getHistoryById(id))
   }, [id]);
 
-  const rupiah = (number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "decimal",
-      currency: "IDR",
-    }).format(number);
-  };
+  console.log(history)
+
   return (
     <div className="bg-[#e5e5e5]">
       <header className="px-10 py-6 bg-white sticky top-0">
@@ -70,8 +58,8 @@ export default function Home() {
           <div className="text-white bg-primary p-5 rounded-xl flex justify-between items-center px-5">
             <div>
               <p>Balance</p>
-              <h3 className="text-bold text-2xl">Rp{rupiah(user.balance)}</h3>
-              <p className="text-sm">{user.phone}</p>
+              <h3 className="text-bold text-2xl">Rp{rupiah(data.balance)}</h3>
+              <p className="text-sm">{data.phone}</p>
             </div>
 
             <div>
