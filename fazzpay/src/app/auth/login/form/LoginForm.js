@@ -84,7 +84,7 @@ With 30.000+ Users
                         password: e.target.value,
                     })
                 }}
-                type='password' placeholder='Enter your password' className='text-sm w-full bg-primary active:border-none focus:outline-none '/>
+                type='password' placeholder='Enter your password' className='text-sm w-full bg-transparent active:border-none focus:outline-none '/>
             </div>
             <p onClick={() => {
                 router.push('/auth/forgot-password')
