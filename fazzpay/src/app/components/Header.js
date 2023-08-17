@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 import placeholder from "../../assets/img/placeholder.jpg";
-import { RiLogoutCircleLine} from "react-icons/ri";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 import { RxDashboard } from "react-icons/rx";
 import { RxPerson } from "react-icons/rx";
@@ -16,7 +16,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setCookie } from 'cookies-next'
+import { deleteCookie } from "cookies-next";
 import { getUserById } from "../../redux/action/userById";
 
 const Header = () => {
@@ -26,19 +26,19 @@ const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleLogout = (e) => {
-    e.preventDefault();
-    setCookie('login', false)
+    deleteCookie("login");
     localStorage.removeItem("@fazzLogin");
     setIsLogin(false);
   };
 
-  const {data} = useSelector(state => state.userDataById)
-  const dispatch = useDispatch()
+  const { data } = useSelector((state) => state.userDataById);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (localStorage.getItem("@fazzLogin")) {
-      const userId = JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id;
+      const userId = JSON.parse(localStorage.getItem("@fazzLogin")).user
+        .user_id;
       setIsLogin(true);
-      dispatch(getUserById(userId))
+      dispatch(getUserById(userId));
     } else {
       setIsLogin(false);
     }
@@ -75,13 +75,17 @@ const Header = () => {
             <div>
               <div className="flex content-center gap-5 justify-between items-center">
                 <div className="flex content-center justify-between items-center gap-3">
-                  {data.user_image && <Image
-                    src={data.user_image === null ? placeholder : data.user_image}
-                    width={50}
-                    height={50}
-                    alt="user-image"
-                    className="h-10 w-10 rounded-lg bg-primary object-cover"
-                  />}
+                  {data.user_image && (
+                    <Image
+                      src={
+                        data.user_image === null ? placeholder : data.user_image
+                      }
+                      width={50}
+                      height={50}
+                      alt="user-image"
+                      className="h-10 w-10 rounded-lg bg-primary object-cover"
+                    />
+                  )}
 
                   <div>
                     <p className="font-bold">{`${data.first_name} ${data.last_name}`}</p>
@@ -132,13 +136,17 @@ const Header = () => {
                 onClick={() => router.push("/profile")}
                 className="cursor-pointer flex flex-col items-center mx-20 py-5 text-white"
               >
-                {data.user_image && <Image
-                  width={500}
-                  height={500}
-                  className="w-28 h-28 rounded-full object-cover bg-white object-center"
-                  src={data.user_image !== null ? data.user_image : placeholder}
-                  alt="user-profile"
-                />}
+                {data.user_image && (
+                  <Image
+                    width={500}
+                    height={500}
+                    className="w-28 h-28 rounded-full object-cover bg-white object-center"
+                    src={
+                      data.user_image !== null ? data.user_image : placeholder
+                    }
+                    alt="user-profile"
+                  />
+                )}
                 <p className="font-bold py-3">
                   {isLogin
                     ? data.first_name + " " + data.last_name
@@ -177,13 +185,14 @@ const Header = () => {
               <RxPerson size={25} className="text-text mx-3" />
               <p>Profile</p>
             </div>
-            <div
+            <Link
+              href={`/`}
               onClick={handleLogout}
               className="py-3 absolute right-2 bottom-10  flex items-center justify-around cursor-pointer hover:text-red-400"
             >
               <RiLogoutCircleLine size={25} className="text-text mx-3" />
               <p>Logout</p>
-            </div>
+            </Link>
           </div>
         ) : (
           <div>
