@@ -21,7 +21,7 @@ export default function TransferAmount() {
   const {data} = useSelector(state => state.userDataById)
   useEffect(() => {
     dispatch(getUserById(userId[1]))
-  }, [userId, dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
     axios
@@ -58,7 +58,7 @@ export default function TransferAmount() {
     } else {
       setValid(true);
     }
-  }, [paymentDetail.amount])
+  }, [])
 
 
   return (
