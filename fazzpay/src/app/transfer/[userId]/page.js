@@ -17,7 +17,6 @@ export default function TransferAmount() {
   const [user, setUser] = useState({});
   const [error, setError] = useState(false);
 
-  const dispatch = useDispatch();
   const { data } = useSelector((state) => state.userDataById);
 
   useEffect(() => {
@@ -38,11 +37,16 @@ export default function TransferAmount() {
 
   const [paymentDetail, setPaymentDetail] = useState({});
   const [valid, setValid] = useState();
+  const [amountError, setAmountError] = useState(false);
 
   const handelPayment = (e) => {
     e.preventDefault();
-    sessionStorage.setItem("@session", JSON.stringify(paymentDetail));
-    router.push(`/transfer/detail/${userId[1]}`);
+    if (parseInt(paymentDetail.amount) > parseInt(data.balance)) {
+      setAmountError(true);
+    } else {
+      sessionStorage.setItem("@session", JSON.stringify(paymentDetail));
+      router.push(`/transfer/detail/${userId[1]}`);
+    }
   };
 
   useEffect(() => {
@@ -92,9 +96,15 @@ export default function TransferAmount() {
           </p>
 
           <div className="w-full mx-auto">
+          <p
+              className={
+                (amountError !== true ? "invisible" : "visible") +
+                " font-semibold text-red-400 bg-red-200 px-10 py-2 rounded-lg mt-5"
+              }
+            >*You don't have enough money to transfer</p>
             <p
               className={
-                (error != true ? "invisible" : "visible") +
+                (error !== true ? "invisible" : "visible") +
                 " font-semibold text-red-400 bg-red-200 px-10 py-2 rounded-lg mt-5"
               }
             >
@@ -102,6 +112,7 @@ export default function TransferAmount() {
             </p>
             <input
               onChange={(e) => {
+                setAmountError(false);
                 setPaymentDetail({
                   ...paymentDetail,
                   name: `${user.first_name} ${user.last_name}`,

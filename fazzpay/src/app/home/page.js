@@ -14,7 +14,7 @@ import { getUserById } from "../../redux/action/userById";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import { getHistoryById } from "../../redux/action/history";
-import { rupiah } from "../../utils/balanceFormat";
+import  rupiah  from "../../utils/balanceFormat";
 import Header from "../components/Header";
 import { useRouter } from "next/navigation";
 
@@ -54,7 +54,7 @@ export default function Home() {
           <div className="text-white bg-primary p-5 rounded-xl flex justify-between items-center px-5">
             <div>
               <p>Balance</p>
-              <h3 className="text-bold text-2xl">Rp{rupiah(data.balance)}</h3>
+              <h3 className="text-bold text-2xl">Rp{rupiah(parseInt(data.balance))}</h3>
               <p className="text-sm">{data.phone}</p>
             </div>
 

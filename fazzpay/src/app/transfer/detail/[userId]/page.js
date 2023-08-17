@@ -7,7 +7,7 @@ import Image from "next/image";
 import MainMenu from "../../../../app/components/MainMenu";
 import Header from "../../../../app/components/Header";
 import FooterAfterLogin from "../../../../app/components/FooterAfterLogin";
-import rupiah from "../../../../utils/balanceFormat"
+import rupiah from "../../../../utils/balanceFormat";
 
 import placeholder from "../../../../assets/img/placeholder.jpg";
 import { useSelector } from "react-redux";
@@ -20,7 +20,6 @@ export default function Confirmation() {
   const [receiver, setReceiver] = useState({});
   const userId = pathName.split(`/transfer/detail/`);
   const [pinError, setPinError] = useState(false);
-  const [amountError, setAmountError] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("@fazzLogin")) {
@@ -33,8 +32,9 @@ export default function Confirmation() {
   const [pinBox, setPinBox] = useState(false);
 
   const handleContinue = () => {
-    if (pinBox === false) setPinBox(true);
-    if (pinBox === true) setPinBox(false);
+    pinBox ? setPinBox(false) : setPinBox(true)
+    pinError ? setPinError(false) : setPinBox(true)
+    
   };
 
   const handleConfirm = (e) => {
@@ -44,7 +44,7 @@ export default function Confirmation() {
         .post(`https://fazz.adaptable.app/api/v1/transaction/`, {
           senderId: JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id,
           receiverId: userId[1],
-          amount: parseInt(userData.amount),
+          amount: parseInt(receiver.amount),
         })
         .catch((err) => {
           `ini ${err}`;
@@ -52,12 +52,8 @@ export default function Confirmation() {
       router.push(`/transfer/success/`);
     } else if (parseInt(pin) != parseInt(data.pin)) {
       setPinError(true);
-      setPin([])
-    } else if (receiver.amount > data.balance) {
-      setAmountError(true);
-      setPin([])
+      setPin([]);
     }
-
     setPinBox(false);
   };
 
@@ -72,6 +68,15 @@ export default function Confirmation() {
       <div className="px-10 py-6 bg-white">
         <Header />
       </div>
+        <p
+          className={
+            (pinError === true ? "visible" : "invisible") +
+            " absolute left-1/2 transform -translate-x-1/2 w-80 text-center font-semibold text-red-400 bg-red-200 px-10 py-2 rounded-lg"
+          }
+        >
+          *Your PIN is not valid
+        </p>
+
       <main className="flex">
         <div className="hidden lg:block">
           <MainMenu />
@@ -102,7 +107,9 @@ export default function Confirmation() {
           </div>
           <div className="mt-5">
             <p className="text-slate-400 text-sm">Balance Left</p>
-            <p className="font-bold">{rupiah(receiver.balance)}</p>
+            <p className="font-bold">
+              {rupiah(parseInt(data.balance) - parseInt(receiver.amount))}
+            </p>
           </div>
           <div className="mt-5">
             <p className="text-slate-400 text-sm">Date & Time</p>
@@ -124,12 +131,14 @@ export default function Confirmation() {
               pinBox === false
                 ? "hidden"
                 : "block" +
-                  " py-10 bg-white grid px-10 inset-center rounded-lg shadow-xl"
+                  " py-10 bg-white grid px-10 inset-center rounded-lg pin-shadow"
             }
           >
             <p
               onClick={() => {
                 setPinBox(false);
+                setPinError(false);
+                setPin([]);
               }}
               className="bg-red-500 w-5 text-center absolute right-0 rounded-tr-lg hover:bg-white border-3 border-transparent  hover:text-red-500 hover:border-3 cursor-pointer hover:border-red-500 text-white inline"
             >

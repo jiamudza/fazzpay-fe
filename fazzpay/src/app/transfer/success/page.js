@@ -12,11 +12,13 @@ import placeholder from "../../../assets/img/placeholder.jpg"
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import {BiDownload} from "react-icons/bi"
 import Header from "../../../app/components/Header";
+import { useSelector } from "react-redux";
 
 export default function Confirmation() {
   const router = useRouter()
 
   const [userData, setUserData] = useState({})
+  const {data} = useSelector(state=> state.userDataById)
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -70,7 +72,7 @@ export default function Confirmation() {
           </div>
           <div className="mt-5">
             <p className="text-slate-400 text-sm">Balance Left</p>
-            <p className="font-bold">{rupiah(userData.balance)}</p>
+            <p className="font-bold">{rupiah(data.balance)}</p>
           </div>
           <div className="mt-5">
             <p className="text-slate-400 text-sm">Date & Time</p>
