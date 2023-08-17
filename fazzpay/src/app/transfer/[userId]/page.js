@@ -21,7 +21,7 @@ export default function TransferAmount() {
   const {data} = useSelector(state => state.userDataById)
   useEffect(() => {
     dispatch(getUserById(userId[1]))
-  }, [userId[1], dispatch]);
+  }, [userId, dispatch]);
 
   useEffect(() => {
     axios
@@ -34,7 +34,7 @@ export default function TransferAmount() {
         setUser(res.data.data);
       })
       .catch((err) => err);
-  });
+  }, []);
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {

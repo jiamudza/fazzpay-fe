@@ -10,7 +10,7 @@ import FooterAfterLogin from "../../../../app/components/FooterAfterLogin";
 
 import placeholder from "../../../../assets/img/placeholder.jpg";
 
-export default function Confirmation({ callback }) {
+export default function Confirmation() {
   const router = useRouter();
   const pathName = usePathname();
   const [user, setUser] = useState({
