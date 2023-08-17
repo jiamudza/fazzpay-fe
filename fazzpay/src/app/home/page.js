@@ -23,9 +23,6 @@ export default function Home() {
 
   // get id  by localStorage
   const [id, setId] = useState("");
-  useEffect(() => {
-    
-  }, []);
 
   // get data user by id
   const { data } = useSelector((state) => state.userDataById)
@@ -37,12 +34,7 @@ export default function Home() {
     }
     dispatch(getUserById(id))
     dispatch(getHistoryById(id))
-  }, [id])
-
-  // get transaction history by id
-  // useEffect(() => {
-  //   dispatch(getHistoryById(id))
-  // }, [id]);
+  }, [])
 
   return (
     <div className="bg-[#e5e5e5]">
