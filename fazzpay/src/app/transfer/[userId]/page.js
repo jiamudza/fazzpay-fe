@@ -26,7 +26,7 @@ export default function TransferAmount() {
         setUser(res.data.data);
       })
       .catch((err) => err);
-  }, []);
+  }, [userId]);
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -58,7 +58,7 @@ export default function TransferAmount() {
     } else {
       setValid(true);
     }
-  }, []);
+  }, [paymentDetail.amount]);
 
   return (
     <div className="bg-[#e5e5e5]">
@@ -101,7 +101,7 @@ export default function TransferAmount() {
                 (amountError !== true ? "invisible" : "visible") +
                 " font-semibold text-red-400 bg-red-200 px-10 py-2 rounded-lg mt-5"
               }
-            >*You don't have enough money to transfer</p>
+            >*You don&apos;t have enough money to transfer</p>
             <p
               className={
                 (error !== true ? "invisible" : "visible") +

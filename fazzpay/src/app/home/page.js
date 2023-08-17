@@ -31,7 +31,7 @@ export default function Home() {
     } else {
       router.push('/auth/login')
     }
-  },[])
+  },[router])
 
   // get data user by id
   const { data } = useSelector((state) => state.userDataById)
@@ -39,7 +39,7 @@ export default function Home() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getHistoryById(id))
-  }, [id])
+  }, [id, dispatch])
 
   return (
     <div className="bg-[#e5e5e5]">
