@@ -9,6 +9,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { CiLogout } from "react-icons/ci";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import Link from "next/link";
+import {setCookie} from 'cookies-next'
 
 //utils
 import { usePathname } from "next/navigation";
@@ -113,7 +114,7 @@ export default function MainMenu() {
       <div
         onClick={(e) => {
           e.preventDefault();
-
+          setCookie("login", false)
           localStorage.removeItem("@fazzLogin");
         }}
         className="text-slate-500 mt-40 font-semibold flex gap-3 my-10 hover:text-blue-300 cursor-pointer"

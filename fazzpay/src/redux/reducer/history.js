@@ -8,7 +8,6 @@ const historyReducer = (state = initialState, action = {}) => {
         loading: true,
       };
     case "GET_HISTORY_SUCCESS":
-        console.log(action.payload)
       return {
         ...state,
         loading: false,

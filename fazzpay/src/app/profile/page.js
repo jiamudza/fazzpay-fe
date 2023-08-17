@@ -1,5 +1,5 @@
 "use client";
-import MainMenu from "@/app/components/MainMenu";
+import MainMenu from "../../app/components/MainMenu";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ import { RxPencil1 } from "react-icons/rx";
 import { BsArrowRight } from "react-icons/bs";
 
 import placeholder from '../../assets/img/placeholder.jpg'
-import Header from "@/app/components/Header";
+import Header from "../../app/components/Header";
 import FooterAfterLogin from "../components/FooterAfterLogin";
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -60,13 +60,13 @@ export default function Profile() {
         <div className="flex flex-col content-center items-center p-10 w-full m-10 bg-white rounded-xl shadow-xl">
 
 
-              <Image
+              {user.user_image && <Image
                 src={user.user_image === null ? placeholder : user.user_image}
                 width={1200}
                 height={1200}
                 alt="user-image"
                 className="h-20 w-20 rounded-lg bg-transparent object-cover"
-                />
+                />}
           <label
             htmlFor="userImage"
             className="text-sm text-slate-400 flex content-center justify-center items-center gap-1 cursor-pointer"

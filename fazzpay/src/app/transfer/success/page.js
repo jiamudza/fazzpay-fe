@@ -1,18 +1,17 @@
 "use client";
-import FooterAfterLogin from "@/app/components/FooterAfterLogin";
+import FooterAfterLogin from "../../../app/components/FooterAfterLogin";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Link from "next/link";
 
 import Image from "next/image";
-import MainMenu from "@/app/components/MainMenu";
+import MainMenu from "../../../app/components/MainMenu";
 
-import placeholder from "@/assets/img/placeholder.jpg"
+import placeholder from "../../../assets/img/placeholder.jpg"
 
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import {BiDownload} from "react-icons/bi"
-import Header from "@/app/components/Header";
+import Header from "../../../app/components/Header";
 
 export default function Confirmation() {
   const router = useRouter()

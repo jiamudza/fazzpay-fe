@@ -1,12 +1,12 @@
 "use client";
-import MainMenu from "@/app/components/MainMenu";
-import Header from "@/app/components/Header";
+import MainMenu from "../../..//app/components/MainMenu";
+import Header from "../../../app/components/Header";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
-import FooterAfterLogin from "@/app/components/FooterAfterLogin";
+import FooterAfterLogin from "../../../app/components/FooterAfterLogin";
 
 export default function PersonalInformation() {
   const [user, setUser] = useState({}); 

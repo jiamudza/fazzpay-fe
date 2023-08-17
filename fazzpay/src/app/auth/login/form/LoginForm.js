@@ -8,6 +8,7 @@ import {FiLock} from 'react-icons/fi'
 
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { setCookie } from 'cookies-next'
 export default function LoginForm() {
     const router = useRouter()
 
@@ -30,6 +31,7 @@ export default function LoginForm() {
             data: loginForm,
         })
         .then(res => {
+            setCookie("login", true)
             localStorage.setItem('@fazzLogin', JSON.stringify(res.data.data))
             router.push('/home')
         })

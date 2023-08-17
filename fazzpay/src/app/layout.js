@@ -1,4 +1,4 @@
-import { ReduxProvider } from '@/redux/provider'
+import { ReduxProvider } from '../redux/provider'
 import './globals.css'
 import { Inter } from 'next/font/google'
 

@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import placeholder from "@/assets/img/placeholder.jpg";
-import { RiLogoutCircleLine, RiSettings3Fill } from "react-icons/ri";
+import placeholder from "../../assets/img/placeholder.jpg";
+import { RiLogoutCircleLine} from "react-icons/ri";
 
 import { RxDashboard } from "react-icons/rx";
 import { RxPerson } from "react-icons/rx";
@@ -10,13 +10,14 @@ import { AiOutlineArrowUp } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { VscBell } from "react-icons/vsc";
-import axios from "axios";
 
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "@/redux/action/userById";
+
+import { setCookie } from 'cookies-next'
+import { getUserById } from "../../redux/action/userById";
 
 const Header = () => {
   const router = useRouter();
@@ -26,6 +27,7 @@ const Header = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    setCookie('login', false)
     localStorage.removeItem("@fazzLogin");
     setIsLogin(false);
   };
@@ -40,7 +42,7 @@ const Header = () => {
     } else {
       setIsLogin(false);
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="font-nunito bg-white bg-opacity-90">

@@ -2,12 +2,12 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Placeholder from "../../assets/img/placeholder.jpg";
-import MainMenu from "@/app/components/MainMenu";
+import MainMenu from "../../app/components/MainMenu";
 import Link from "next/link";
-import Header from "@/app/components/Header";
-import FooterAfterLogin from "@/app/components/FooterAfterLogin";
+import Header from "../../app/components/Header";
+import FooterAfterLogin from "../../app/components/FooterAfterLogin";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUser } from "@/redux/action/user";
+import { getAllUser } from "../../redux/action/user";
 import { useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
@@ -19,7 +19,7 @@ export default function Transfer() {
   const [page, setPage] = useState(1);
   useEffect(() => {
     dispatch(getAllUser(search, page));
-  }, [search, page]);
+  }, [search, page, dispatch]);
 
   return (
     <div className="font-nunito bg-[#e5e5e5] h-full">

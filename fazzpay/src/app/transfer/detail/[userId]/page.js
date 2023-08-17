@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import Image from "next/image";
-import MainMenu from "@/app/components/MainMenu";
-import Header from "@/app/components/Header";
-import FooterAfterLogin from "@/app/components/FooterAfterLogin";
+import MainMenu from "../../../../app/components/MainMenu";
+import Header from "../../../../app/components/Header";
+import FooterAfterLogin from "../../../../app/components/FooterAfterLogin";
 
 import placeholder from "../../../../assets/img/placeholder.jpg";
 

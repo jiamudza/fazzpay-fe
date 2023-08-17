@@ -1,31 +1,27 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
-import MainMenu from "@/app/components/MainMenu";
-import { TbRuler } from "react-icons/tb";
-import Header from "@/app/components/Header";
-import FooterAfterLogin from "@/app/components/FooterAfterLogin";
+import MainMenu from "../../../app/components/MainMenu";
+import Header from "../../../app/components/Header";
+import FooterAfterLogin from "../../../app/components/FooterAfterLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserById } from "../../../redux/action/userById";
 
 export default function TransferAmount() {
   const pathName = usePathname();
   const userId = pathName.split("/transfer/");
   const router = useRouter();
-  const [data, setData] = useState({});
+  // const [data, setData] = useState({});
   const [user, setUser] = useState({});
   const [error, setError] = useState(false)
 
+  const dispatch = useDispatch()
+  const {data} = useSelector(state => state.userDataById)
   useEffect(() => {
-    axios
-      .get(`https://fazz.adaptable.app/api/v1/user/${userId[1]}`)
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        err;
-      });
-  });
+    dispatch(getUserById(userId[1]))
+  }, [userId[1], dispatch]);
 
   useEffect(() => {
     axios

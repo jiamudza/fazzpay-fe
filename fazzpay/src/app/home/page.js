@@ -1,6 +1,6 @@
 "use client";
-import FooterAfterLogin from "@/app/components/FooterAfterLogin";
-import MainMenu from "@/app/components/MainMenu";
+import FooterAfterLogin from "../components/FooterAfterLogin";
+import MainMenu from "../components/MainMenu";
 import Link from "next/link";
 
 //icons
@@ -8,15 +8,14 @@ import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import axios from "axios";
-import Header from "@/app/components/Header";
 
 import placeholder from "../../assets/img/placeholder.jpg"
-import { getUserById } from "@/redux/action/userById";
+import { getUserById } from "../../redux/action/userById";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
-import { getHistoryById } from "@/redux/action/history";
-import { rupiah } from "@/utils/balanceFormat";
+import { getHistoryById } from "../../redux/action/history";
+import { rupiah } from "../../utils/balanceFormat";
+import Header from "../components/Header";
 
 
 export default function Home() {
@@ -35,15 +34,13 @@ export default function Home() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getUserById(id))
-  }, [id])
+  }, [id, dispatch])
 
   // get transaction history by id
   const { history } = useSelector(state => state.historyById)
   useEffect(() => {
     dispatch(getHistoryById(id))
-  }, [id]);
-
-  console.log(history)
+  }, [id, dispatch]);
 
   return (
     <div className="bg-[#e5e5e5]">
