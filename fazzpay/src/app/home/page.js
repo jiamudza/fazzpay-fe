@@ -24,23 +24,25 @@ export default function Home() {
   // get id  by localStorage
   const [id, setId] = useState("");
   useEffect(() => {
-    if (localStorage.getItem("@fazzLogin")) {
-      setId(JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id);
-    }
+    
   }, []);
 
   // get data user by id
   const { data } = useSelector((state) => state.userDataById)
+  const { history } = useSelector(state => state.historyById)
   const dispatch = useDispatch()
   useEffect(() => {
+    if (localStorage.getItem("@fazzLogin")) {
+      setId(JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id);
+    }
     dispatch(getUserById(id))
+    dispatch(getHistoryById(id))
   }, [id])
 
   // get transaction history by id
-  const { history } = useSelector(state => state.historyById)
-  useEffect(() => {
-    dispatch(getHistoryById(id))
-  }, [id]);
+  // useEffect(() => {
+  //   dispatch(getHistoryById(id))
+  // }, [id]);
 
   return (
     <div className="bg-[#e5e5e5]">
