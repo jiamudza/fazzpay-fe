@@ -42,7 +42,7 @@ const Header = () => {
     } else {
       setIsLogin(false);
     }
-  }, [dispatch]);
+  }, [userId]);
 
   return (
     <div className="font-nunito bg-white bg-opacity-90">
