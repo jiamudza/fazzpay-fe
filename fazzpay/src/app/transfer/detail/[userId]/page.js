@@ -7,34 +7,28 @@ import Image from "next/image";
 import MainMenu from "../../../../app/components/MainMenu";
 import Header from "../../../../app/components/Header";
 import FooterAfterLogin from "../../../../app/components/FooterAfterLogin";
+import rupiah from "../../../../utils/balanceFormat"
 
 import placeholder from "../../../../assets/img/placeholder.jpg";
+import { useSelector } from "react-redux";
 
 export default function Confirmation() {
   const router = useRouter();
   const pathName = usePathname();
-  const [user, setUser] = useState({
-    data: {},
-  });
+  const { data } = useSelector((state) => state.userDataById);
   const [pin, setPin] = useState([]);
-
-  const [userData, setUserData] = useState({});
+  const [receiver, setReceiver] = useState({});
   const userId = pathName.split(`/transfer/detail/`);
+  const [pinError, setPinError] = useState(false);
+  const [amountError, setAmountError] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("@fazzLogin")) {
-      setUserData(JSON.parse(sessionStorage.getItem("@session")));
+      setReceiver(JSON.parse(sessionStorage.getItem("@session")));
     } else {
       router.push(`/auth/login/`);
     }
   }, [router]);
-
-  const rupiah = (number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-    }).format(number);
-  };
 
   const [pinBox, setPinBox] = useState(false);
 
@@ -45,7 +39,7 @@ export default function Confirmation() {
 
   const handleConfirm = (e) => {
     e.preventDefault();
-    if (parseInt(pin) === parseInt(user.data.pin)) {
+    if (parseInt(pin) === parseInt(data.pin)) {
       axios
         .post(`https://fazz.adaptable.app/api/v1/transaction/`, {
           senderId: JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id,
@@ -56,31 +50,16 @@ export default function Confirmation() {
           `ini ${err}`;
         });
       router.push(`/transfer/success/`);
-    } else if (parseInt(pin) != parseInt(user.data.pin))
-      alert("your pin is not valid");
-    else if (userData.amount > user.data.balance)
-      alert("you dont have enough balance on your wallet");
+    } else if (parseInt(pin) != parseInt(data.pin)) {
+      setPinError(true);
+      setPin([])
+    } else if (receiver.amount > data.balance) {
+      setAmountError(true);
+      setPin([])
+    }
 
     setPinBox(false);
   };
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://fazz.adaptable.app/api/v1/user/${
-          JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id
-        }`
-      )
-      .then((res) => {
-        setUser({
-          ...user,
-          data: res.data.data,
-        });
-      })
-      .catch((err) => err);
-  }, [user]);
-
-  console.log(userData);
 
   return (
     <div
@@ -100,9 +79,9 @@ export default function Confirmation() {
         <div className="m-10 p-10 rounded-xl shadow-2xl w-full bg-white">
           <p className="font-bold">Transfer To</p>
           <div className="mt-5 flex items-center gap-5">
-            {userData.image && (
+            {receiver.image && (
               <Image
-                src={userData.image === null ? placeholder : userData.image}
+                src={receiver.image === null ? placeholder : receiver.image}
                 width={100}
                 height={100}
                 alt="receiver-image"
@@ -110,8 +89,8 @@ export default function Confirmation() {
               />
             )}
             <div>
-              <p className="font-bold">{userData.name}</p>
-              <p className="text-sm text-slate-400">{userData.phone}</p>
+              <p className="font-bold">{receiver.name}</p>
+              <p className="text-sm text-slate-400">{receiver.phone}</p>
             </div>
           </div>
 
@@ -119,19 +98,19 @@ export default function Confirmation() {
 
           <div className="mt-5">
             <p className="text-slate-400 text-sm">Amount</p>
-            <p className="font-bold">{rupiah(userData.amount)}</p>
+            <p className="font-bold">{rupiah(receiver.amount)}</p>
           </div>
           <div className="mt-5">
             <p className="text-slate-400 text-sm">Balance Left</p>
-            <p className="font-bold">{rupiah(userData.balance)}</p>
+            <p className="font-bold">{rupiah(receiver.balance)}</p>
           </div>
           <div className="mt-5">
             <p className="text-slate-400 text-sm">Date & Time</p>
-            <p className="font-bold">{userData.date}</p>
+            <p className="font-bold">{receiver.date}</p>
           </div>
           <div className="mt-5">
             <p className="text-slate-400 text-sm">Notes</p>
-            <p className="font-bold">{userData.notes}</p>
+            <p className="font-bold">{receiver.notes}</p>
           </div>
 
           <button

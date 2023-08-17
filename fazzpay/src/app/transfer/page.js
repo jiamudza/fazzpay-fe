@@ -35,7 +35,6 @@ export default function Transfer() {
         </div>
         <main className="w-full relative mt-10 bg-white p-5 rounded-lg shadow-2xl">
           <p className="text-xl font-bold">Search Receiver</p>
-          <p>{page}</p>
           <input
             onChange={(e) => {
               setSearch(e.target.value);
@@ -81,33 +80,15 @@ export default function Transfer() {
             })}
           {/* pagination */}
           <div className="absolute bottom-10 flex justify-center gap-2 w-full items-center">
-            <div className="bg-white relative text-primary border-2 border-primary h-6 w-6 rounded-full">
+            <div className="bg-white relative text-primary border-2 border-primary h-6 w-6 rounded-full hover:scale-110 duration-150 focus:scale-100">
               <AiOutlineLeft onClick={() => {
                 page === 1 ? setPage(1) : setPage(page -1)
               }} className="inset-center" />
             </div>
-            <div className={(page >= 4 ? "block" : "hidden") + " bg-primary relative text-white h-8 w-8 rounded-full"}>
-              <p className="inset-center">1</p>
-            </div>
-            <div className={(page >= 3 ? "block" : "hidden") + " bg-primary relative text-white h-8 w-8 rounded-full"}>
-              <p className="inset-center">{page === 3 ? 1 : "..."}</p>
-            </div>
             <div className="bg-primary relative text-white h-8 w-8 rounded-full">
-              <p className="inset-center">{page === 1 ? page : page - 1}</p>
+              <p className="inset-center">{page}</p>
             </div>
-            <div className="bg-primary relative text-white h-8 w-8 rounded-full">
-              <p className="inset-center">{page === 1 ? page + 1 : page}</p>
-            </div>
-            <div className="bg-primary relative text-white h-8 w-8 rounded-full">
-              <p className="inset-center">{page === 1 ? page + 2 : page + 1}</p>
-            </div>
-            <div className={(data.count < 7 ? "hidden" : "block") + " bg-primary relative text-white h-8 w-8 rounded-full"}>
-              <p className="inset-center">{"..."}</p>
-            </div>
-            <div className={(data.count < 9 ? "hidden" : "block") + " bg-primary relative text-white h-8 w-8 rounded-full"}>
-              <p className="inset-center">{data.count/1}</p>
-            </div>
-            <div className="bg-white relative text-primary border-2 border-primary h-6 w-6 rounded-full">
+            <div className="bg-white relative text-primary border-2 border-primary h-6 w-6 rounded-full hover:scale-110 duration-150">
               <AiOutlineRight onClick={() => {
                 setPage(page + 1)
               }} className="inset-center" />

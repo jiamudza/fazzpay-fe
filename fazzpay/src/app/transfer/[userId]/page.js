@@ -15,21 +15,14 @@ export default function TransferAmount() {
   const router = useRouter();
   // const [data, setData] = useState({});
   const [user, setUser] = useState({});
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
-  const dispatch = useDispatch()
-  const {data} = useSelector(state => state.userDataById)
-  useEffect(() => {
-    dispatch(getUserById(userId[1]))
-  }, [dispatch]);
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.userDataById);
 
   useEffect(() => {
     axios
-      .get(
-        `https://fazz.adaptable.app/api/v1/user/${
-          JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id
-        }`
-      )
+      .get(`https://fazz.adaptable.app/api/v1/user/${userId[1]}`)
       .then((res) => {
         setUser(res.data.data);
       })
@@ -48,18 +41,20 @@ export default function TransferAmount() {
 
   const handelPayment = (e) => {
     e.preventDefault();
-    sessionStorage.setItem('@session', JSON.stringify(paymentDetail))
-    router.push(`/transfer/detail/${userId[1]}`)
+    sessionStorage.setItem("@session", JSON.stringify(paymentDetail));
+    router.push(`/transfer/detail/${userId[1]}`);
   };
 
   useEffect(() => {
-    if (typeof paymentDetail.amount === 'undefined' || typeof paymentDetail.amount === NaN) {
+    if (
+      typeof paymentDetail.amount === "undefined" ||
+      typeof paymentDetail.amount === NaN
+    ) {
       setValid(false);
     } else {
       setValid(true);
     }
-  }, [])
-
+  }, []);
 
   return (
     <div className="bg-[#e5e5e5]">
@@ -75,16 +70,18 @@ export default function TransferAmount() {
 
           <div className="mx-auto">
             <div className="mt-5 flex items-center gap-5">
-              {data.user_image && <Image
-                src={data.user_image}
-                alt="user(receiver)-image"
-                width={100}
-                height={100}
-                className="h-10 w-10 rounded-lg bg-primary"
-              />}
+              {user.user_image && (
+                <Image
+                  src={user.user_image}
+                  alt="user(receiver)-image"
+                  width={100}
+                  height={100}
+                  className="h-10 w-10 rounded-lg bg-primary"
+                />
+              )}
               <div>
-                <p className="font-bold">{`${data.first_name} ${data.last_name}`}</p>
-                <p className="text-sm text-slate-400">{data.phone}</p>
+                <p className="font-bold">{`${user.first_name} ${user.last_name}`}</p>
+                <p className="text-sm text-slate-400">{user.phone}</p>
               </div>
             </div>
           </div>
@@ -97,39 +94,36 @@ export default function TransferAmount() {
           <div className="w-full mx-auto">
             <p
               className={
-                error != true
-                  ? "hidden"
-                  : "transition-transform duration-150 block" +
-                    " text-center fail-shadow px-5 py-2 mt-5 rounded-lg w-60 mx-auto font-nunito text-red-500"
-              } 
+                (error != true ? "invisible" : "visible") +
+                " font-semibold text-red-400 bg-red-200 px-10 py-2 rounded-lg mt-5"
+              }
             >
-              Transfer amount is not valid
+              *Transfer amount is not valid
             </p>
             <input
               onChange={(e) => {
                 setPaymentDetail({
                   ...paymentDetail,
-                  name: `${data.first_name} ${data.last_name}`,
-                  phone: data.phone,
+                  name: `${user.first_name} ${user.last_name}`,
+                  phone: user.phone,
                   date: new Date(),
                   amount: e.target.value,
-                  image: data.user_image,
+                  image: user.user_image,
                   balance: user.balance - e.target.value,
                 });
 
-                if(e.target.value.length === 0) setValid(false)
-                if(e.target.value.length > 0) {
-                  setError(false)
-                  setValid(true)
+                if (e.target.value.length === 0) setValid(false);
+                if (e.target.value.length > 0) {
+                  setError(false);
+                  setValid(true);
                 }
-
               }}
               type="number"
               className="text-4xl text-primary font-bold py-1 outline-none  focus:outline-0 mt-5 border-b-2 w-40 text-center block mx-auto"
               placeholder="0.00"
             />
             <p className="text-center font-bold block mx-auto mt-10">
-              {rupiah(user.balance)} is Available
+              {rupiah(data.balance)} is Available
             </p>
 
             <input
@@ -153,10 +147,13 @@ export default function TransferAmount() {
               Continue
             </button>
           ) : (
-            <button onClick={(e) => {
-              e.preventDefault()
-              setError(true)
-            }} className="border bg-blue-200 px-6 py-2 rounded-lg font-semibold text-white ease-in-out duration-100 mx-auto mt-10 flex items-center justify-center content-center cursor-default">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setError(true);
+              }}
+              className="border bg-blue-200 px-6 py-2 rounded-lg font-semibold text-white ease-in-out duration-100 mx-auto mt-10 flex items-center justify-center content-center cursor-default"
+            >
               Continue
             </button>
           )}
