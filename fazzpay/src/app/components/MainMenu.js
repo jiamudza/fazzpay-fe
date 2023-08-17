@@ -114,8 +114,8 @@ export default function MainMenu() {
       <div
         onClick={(e) => {
           e.preventDefault();
-          deleteCookie('login')
           localStorage.removeItem("@fazzLogin");
+          deleteCookie('login')
         }}
         className="text-slate-500 mt-40 font-semibold flex gap-3 my-10 hover:text-blue-300 cursor-pointer"
       >
