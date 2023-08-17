@@ -34,13 +34,13 @@ export default function Home() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getUserById(id))
-  }, [id, dispatch])
+  }, [id])
 
   // get transaction history by id
   const { history } = useSelector(state => state.historyById)
   useEffect(() => {
     dispatch(getHistoryById(id))
-  }, [id, dispatch]);
+  }, [id]);
 
   return (
     <div className="bg-[#e5e5e5]">
