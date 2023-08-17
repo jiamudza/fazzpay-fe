@@ -16,25 +16,30 @@ import React from "react";
 import { getHistoryById } from "../../redux/action/history";
 import { rupiah } from "../../utils/balanceFormat";
 import Header from "../components/Header";
+import { useRouter } from "next/navigation";
 
 
 export default function Home() {
+  const router = useRouter()
   const [income, setIncome] = useState(true);
 
   // get id  by localStorage
   const [id, setId] = useState("");
+  useEffect(() => {
+    if(localStorage.getItem('@fazzLogin')) {
+      setId(JSON.parse(localStorage.getItem('@fazzLogin')).user.user_id)
+    } else {
+      router.push('/auth/login')
+    }
+  },[])
 
   // get data user by id
   const { data } = useSelector((state) => state.userDataById)
   const { history } = useSelector(state => state.historyById)
   const dispatch = useDispatch()
   useEffect(() => {
-    if (localStorage.getItem("@fazzLogin")) {
-      setId(JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id);
-    }
-    dispatch(getUserById(id))
     dispatch(getHistoryById(id))
-  }, [])
+  }, [id])
 
   return (
     <div className="bg-[#e5e5e5]">

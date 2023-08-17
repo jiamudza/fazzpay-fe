@@ -7,27 +7,11 @@ import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 import FooterAfterLogin from "../../../app/components/FooterAfterLogin";
+import { useSelector } from "react-redux";
 
-export default function PersonalInformation() {
-  const [user, setUser] = useState({}); 
+export default function PersonalInformation() { 
   const router = useRouter();
-
-  useEffect(() => {
-    if (localStorage.getItem("@fazzLogin")) {
-      axios({
-        url: `https://fazz.adaptable.app/api/v1/user/${
-          JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id
-        }`,
-        method: "GET",
-      })
-        .then((res) => {
-          setUser(res.data.data);
-        })
-        .catch((err) => console.log(err));
-    } else {
-      router.push("/login");
-    }
-  }, [router]);
+  const {data} = useSelector(state=> state.userDataById)
 
   return (
     <div className="bg-[#e5e5e5]">
@@ -47,15 +31,15 @@ export default function PersonalInformation() {
 
           <div className="mt-10">
             <p className="text-sm mt-4 text-slate-400">First Name</p>
-            <p className="font-bold mt-2">{user.first_name}</p>
-            <p className="text-sm mt-4 text-slate-400">First Name</p>
-            <p className="font-bold mt-2">{user.last_name}</p>
+            <p className="font-bold mt-2">{data.first_name}</p>
+            <p className="text-sm mt-4 text-slate-400">last_name Name</p>
+            <p className="font-bold mt-2">{data.last_name}</p>
             <p className="text-sm mt-4 text-slate-400">Verified E-mail</p>
-            <p className="font-bold mt-2 text-slate-400">{user.email}</p>
+            <p className="font-bold mt-2 text-slate-400">{data.email}</p>
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-sm mt-4 text-slate-400">Phone Number</p>
-                <p className="font-bold mt-2">{user.phone}</p>
+                <p className="font-bold mt-2">{data.phone}</p>
               </div>
               <Link href="/profile/personal-information/number" className="text-primary text-sm font-bold">Manage</Link>
             </div>

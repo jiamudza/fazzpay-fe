@@ -11,30 +11,19 @@ import { BsArrowRight } from "react-icons/bs";
 import placeholder from '../../assets/img/placeholder.jpg'
 import Header from "../../app/components/Header";
 import FooterAfterLogin from "../components/FooterAfterLogin";
-export default function Profile() {
-  const [user, setUser] = useState({});
+import { useSelector } from "react-redux";
 
-  useEffect(() => {
-    if (localStorage.getItem("@fazzLogin")) {
-      axios
-        .get(
-          `https://fazz.adaptable.app/api/v1/user/${
-            JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id
-          }`
-        )
-        .then((res) => {
-          setUser(res.data.data);
-        })
-        .catch((err) => err);
-    }
-  }, []);
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+export default function Profile() {
+  const {data} = useSelector(state => state.userDataById)
 
   const handleImage = (e) => {
     const formData = new FormData();
     formData.append("userImage", e.target.files[0]);
     console.log(e.target.files[0]);
     axios({
-      url: `https://fazz.adaptable.app/api/v1/user/image/${user.user_id}`,
+      url: `https://fazz.adaptable.app/api/v1/user/image/${data.user_id}`,
       method: "PATCH",
       data: formData,
       headers: {
@@ -46,6 +35,7 @@ export default function Profile() {
 
       location.reload()
   };
+
   return (
     <div className="bg-[#e5e5e5] font-nunito">
       <header className="px-10 py-6 bg-white">
@@ -60,8 +50,8 @@ export default function Profile() {
         <div className="flex flex-col content-center items-center p-10 w-full m-10 bg-white rounded-xl shadow-xl">
 
 
-              {user.user_image && <Image
-                src={user.user_image === null ? placeholder : user.user_image}
+              {data.user_image && <Image
+                src={data.user_image === null ? placeholder : data.user_image}
                 width={1200}
                 height={1200}
                 alt="user-image"
@@ -81,8 +71,8 @@ export default function Profile() {
             type="file"
             className="mx-auto text-center opacity-0 absolute -z-10"
           />
-          <p className="font-bold mt-5">{`${user.first_name} ${user.last_name}`}</p>
-          <p className="text-sm text-slate-400">{user.phone}</p>
+          <p className="font-bold mt-5">{`${data.first_name} ${data.last_name}`|| <Skeleton />}</p>
+          <p className="text-sm text-slate-400">{data.phone}</p>
 
           <div className="mt-4">
             <Link href="profile/personal-information" className="font-bold text-sm mt-2 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
