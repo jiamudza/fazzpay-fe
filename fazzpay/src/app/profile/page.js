@@ -15,6 +15,8 @@ import { useSelector } from "react-redux";
 
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+
+import { deleteCookie } from "cookies-next";
 export default function Profile() {
   const {data} = useSelector(state => state.userDataById)
 
@@ -87,12 +89,13 @@ export default function Profile() {
               Change PIN
               <BsArrowRight size={20} />
             </Link>
-            <Link href="/" onClick={() => {
+            <button href="/" onClick={() => {
               localStorage.removeItem('@fazzLogin')
+              deleteCookie("login");
             }} className="font-bold text-sm mt-4 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
               Logout
               <BsArrowRight size={20} className="text-slate-300" />
-            </Link>
+            </button>
           </div>
         </div>
       </main>

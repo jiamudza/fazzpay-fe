@@ -29,6 +29,7 @@ const Header = () => {
     deleteCookie("login");
     localStorage.removeItem("@fazzLogin");
     setIsLogin(false);
+    router.push('/')
   };
 
   const { data } = useSelector((state) => state.userDataById);

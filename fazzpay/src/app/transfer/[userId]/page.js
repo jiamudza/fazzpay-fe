@@ -104,7 +104,9 @@ export default function TransferAmount() {
             >*You don&apos;t have enough money to transfer</p>
             <p
               className={
-                (error !== true ? "invisible" : "visible") +
+                (error !== ton&apos;t have enough money to transfer</p>
+            <p
+              classNamrue ? "invisible" : "visible") +
                 " font-semibold text-red-400 bg-red-200 px-10 py-2 rounded-lg mt-5"
               }
             >

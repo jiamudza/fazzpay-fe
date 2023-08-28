@@ -12,11 +12,12 @@ import Link from "next/link";
 import {deleteCookie} from 'cookies-next'
 
 //utils
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 
 export default function MainMenu() {
   const pathname = usePathname();
+  const router = useRouter()
 
   // const [active, setActive] = useState(pathname)
   const [user, setUser] = useState({})
@@ -116,11 +117,12 @@ export default function MainMenu() {
           e.preventDefault();
           localStorage.removeItem("@fazzLogin");
           deleteCookie('login')
+          router.push('/')
         }}
         className="text-slate-500 mt-40 font-semibold flex gap-3 my-10 hover:text-blue-300 cursor-pointer"
       >
         <CiLogout size={20} />
-        <Link href="/">Logout</Link>
+        <p>Logout</p>
       </div>
 
       <div
