@@ -2,10 +2,10 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Placeholder from "../../assets/img/placeholder.jpg";
-import MainMenu from "../../app/components/MainMenu";
+import MainMenu from "../../components/MainMenu";
 import Link from "next/link";
-import Header from "../../app/components/Header";
-import FooterAfterLogin from "../../app/components/FooterAfterLogin";
+import Header from "../../components/Header";
+import FooterAfterLogin from "../../components/FooterAfterLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUser } from "../../redux/action/user";
 import { useState } from "react";

@@ -1,17 +1,17 @@
 "use client";
-import FooterAfterLogin from "../../../app/components/FooterAfterLogin";
+import FooterAfterLogin from "../../../components/FooterAfterLogin";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import Image from "next/image";
-import MainMenu from "../../../app/components/MainMenu";
+import MainMenu from "../../../components/MainMenu";
 
 import placeholder from "../../../assets/img/placeholder.jpg"
 
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import {BiDownload} from "react-icons/bi"
-import Header from "../../../app/components/Header";
+import Header from "../../../components/Header";
 import { useSelector } from "react-redux";
 
 export default function Confirmation() {

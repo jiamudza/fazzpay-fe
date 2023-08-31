@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import Image from "next/image";
-import MainMenu from "../../../../app/components/MainMenu";
-import Header from "../../../../app/components/Header";
-import FooterAfterLogin from "../../../../app/components/FooterAfterLogin";
+import MainMenu from "../../../../components/MainMenu";
+import Header from "../../../../components/Header";
+import FooterAfterLogin from "../../../../components/FooterAfterLogin";
 import rupiah from "../../../../utils/balanceFormat";
 
 import placeholder from "../../../../assets/img/placeholder.jpg";
@@ -44,6 +44,8 @@ export default function Confirmation() {
         .post(`https://fazz.adaptable.app/api/v1/transaction/`, {
           senderId: JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id,
           receiverId: userId[1],
+          senderNumber: receiver.senderNumber,
+          receiverNumber: receiver.receiverNumber,
           amount: parseInt(receiver.amount),
         })
         .catch((err) => {

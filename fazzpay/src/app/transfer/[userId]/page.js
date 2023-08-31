@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
-import MainMenu from "../../../app/components/MainMenu";
-import Header from "../../../app/components/Header";
-import FooterAfterLogin from "../../../app/components/FooterAfterLogin";
+import MainMenu from "../../../components/MainMenu";
+import Header from "../../../components/Header";
+import FooterAfterLogin from "../../../components/FooterAfterLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../../redux/action/userById";
 
@@ -96,61 +96,64 @@ export default function TransferAmount() {
           </p>
 
           <div className="w-full mx-auto">
-          <p
+            <p
               className={
                 (amountError !== true ? "invisible" : "visible") +
                 " font-semibold text-red-400 bg-red-200 px-10 py-2 rounded-lg mt-5"
               }
-            >*You don&apos;t have enough money to transfer</p>
-            <p
-              className={
-                (error !== ton&apos;t have enough money to transfer</p>
-            <p
-              classNamrue ? "invisible" : "visible") +
-                " font-semibold text-red-400 bg-red-200 px-10 py-2 rounded-lg mt-5"
-              }
             >
-              *Transfer amount is not valid
+              *You don&apos;t have enough money to transfer
             </p>
-            <input
-              onChange={(e) => {
-                setAmountError(false);
-                setPaymentDetail({
-                  ...paymentDetail,
-                  name: `${user.first_name} ${user.last_name}`,
-                  phone: user.phone,
-                  date: new Date(),
-                  amount: e.target.value,
-                  image: user.user_image,
-                  balance: user.balance - e.target.value,
-                });
-
-                if (e.target.value.length === 0) setValid(false);
-                if (e.target.value.length > 0) {
-                  setError(false);
-                  setValid(true);
-                }
-              }}
-              type="number"
-              className="text-4xl text-primary font-bold py-1 outline-none  focus:outline-0 mt-5 border-b-2 w-40 text-center block mx-auto"
-              placeholder="0.00"
-            />
-            <p className="text-center font-bold block mx-auto mt-10">
-              {rupiah(data.balance)} is Available
-            </p>
-
-            <input
-              onChange={(e) => {
-                setPaymentDetail({
-                  ...paymentDetail,
-                  notes: e.target.value,
-                });
-              }}
-              type="text"
-              className="w-100 p-2 focus:outline-0 overflow-y-auto border-b block mx-auto mt-5 border-slate-500 text-center"
-              placeholder="Add some notes here"
-            />
           </div>
+          <p
+            className={
+              (error ? "visible" : "invisible") +
+              " font-semibold text-red-400 bg-red-200 px-10 py-2 rounded-lg mt-5"
+            }
+          >
+            *Transfer amount is not valid
+          </p>
+          <input
+            onChange={(e) => {
+              setAmountError(false);
+              setPaymentDetail({
+                ...paymentDetail,
+                name: `${user.first_name} ${user.last_name}`,
+                senderNumber: data.phone,
+                receiverNumber: user.phone,
+                date: new Date(),
+                amount: e.target.value,
+                image: user.user_image,
+                balance: user.balance - e.target.value,
+              });
+
+              console.log(e.target.value.length)
+
+              if (e.target.value.length === 0) setValid(false);
+              if (e.target.value.length >= 1) {
+                setError(false);
+                setValid(true);
+              }
+            }}
+            type="number"
+            className="text-4xl text-primary font-bold py-1 outline-none  focus:outline-0 mt-5 border-b-2 w-40 text-center block mx-auto"
+            placeholder="0.00"
+          />
+          <p className="text-center font-bold block mx-auto mt-10">
+            {rupiah(data.balance)} is Available
+          </p>
+
+          <input
+            onChange={(e) => {
+              setPaymentDetail({
+                ...paymentDetail,
+                notes: e.target.value,
+              });
+            }}
+            type="text"
+            className="w-100 p-2 focus:outline-0 overflow-y-auto border-b block mx-auto mt-5 border-slate-500 text-center"
+            placeholder="Add some notes here"
+          />
 
           {valid === true ? (
             <button

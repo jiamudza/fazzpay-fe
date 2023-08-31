@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import placeholder from "../../assets/img/placeholder.jpg";
+import placeholder from "../assets/img/placeholder.jpg";
 import { RiLogoutCircleLine } from "react-icons/ri";
 
 import { RxDashboard } from "react-icons/rx";
@@ -17,7 +17,11 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 
 import { deleteCookie } from "cookies-next";
-import { getUserById } from "../../redux/action/userById";
+import { getUserById } from "../redux/action/userById";
+
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 const Header = () => {
   const router = useRouter();
@@ -89,12 +93,12 @@ const Header = () => {
                   )}
 
                   <div>
-                    <p className="font-bold">{`${data.first_name} ${data.last_name}`}</p>
-                    <p className="text-sm text-slate-400">{data.phone}</p>
+                    <p className="font-bold">{data.first_name ? `${data.first_name} ${data.last_name}` : <Skeleton />}</p>
+                    <p className="text-sm text-slate-400">{data.phone ? data.phone : <Skeleton />}</p>
                   </div>
                 </div>
                 <div>
-                  <VscBell size={20} />
+                 { data.first_name ? <VscBell size={20} /> : ''}
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 "use client";
-import FooterAfterLogin from "../components/FooterAfterLogin";
-import MainMenu from "../components/MainMenu";
+import FooterAfterLogin from "../../components/FooterAfterLogin";
+import MainMenu from "../../components/MainMenu";
 import Link from "next/link";
 import axios from "axios";
 
@@ -17,20 +17,23 @@ import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import { getHistoryById } from "../../redux/action/history";
 import rupiah from "../../utils/balanceFormat";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { useRouter } from "next/navigation";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import BarChart from './BarChart'
 
 export default function Home() {
   const router = useRouter();
   const [income, setIncome] = useState(true);
 
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
   const [topup, setTopup] = useState(false);
   const [topupAmount, setTopupAmount] = useState(0);
   const [pinBox, setPinBox] = useState(false);
   const [pin, setPin] = useState();
   const [successBox, setSuccessBox] = useState(false);
-
+  const [history, sethistory] = useState({});
 
   // get id  by localStorage
   const [id, setId] = useState("");
@@ -43,13 +46,20 @@ export default function Home() {
     }
   }, [router]);
 
+  useEffect(() => {
+    axios
+      .get(`https://fazz.adaptable.app/api/v1/transaction/` + id)
+      .then((res) => {
+        sethistory(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
   // get data user by id
   const { data } = useSelector((state) => state.userDataById);
-  const { history } = useSelector((state) => state.historyById);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getHistoryById(id));
-  }, [id, dispatch]);
+  // const { history } = useSelector((state) => state.historyById);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,6 +95,10 @@ export default function Home() {
     setPinBox(false);
   };
 
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getHistoryById(id));
+  // }, [id, dispatch]);
   return (
     <div className="bg-[#e5e5e5]">
       <header className="px-10 py-6 bg-white sticky top-0">
@@ -94,16 +108,21 @@ export default function Home() {
         <div className="hidden md:block">
           <MainMenu />
         </div>
-        <div>
-        </div>
+        <div></div>
         <div id="content" className="w-full mt-10 mx-10">
           <div className="text-white bg-primary p-5 rounded-xl flex justify-between items-center px-5">
             <div>
               <p>Balance</p>
               <h3 className="text-bold text-2xl">
-                Rp{rupiah(parseInt(data.balance))}
+                {data.balance ? (
+                  "Rp" + rupiah(parseInt(data.balance))
+                ) : (
+                  <Skeleton baseColor="aquamarine" />
+                )}
               </h3>
-              <p className="text-sm">{data.phone}</p>
+              <p className="text-sm">
+                {data.phone ? data.phone : <Skeleton baseColor="aquamarine" />}
+              </p>
             </div>
 
             <div>
@@ -135,7 +154,9 @@ export default function Home() {
                     className="text-green-600 mx-auto"
                   />
                   <p>Income</p>
-                  <p className="font-bold text-xl">Rp2.200.000</p>
+                  <p className="font-bold text-xl">
+                    Rp{history && history.income ? rupiah(history.income) : 0}
+                  </p>
                 </div>
                 <div>
                   <AiOutlineArrowUp
@@ -143,11 +164,14 @@ export default function Home() {
                     className="text-red-600 mx-auto"
                   />
                   <p>Expense</p>
-                  <p className="font-bold text-xl">Rp2.200.000</p>
+                  <p className="font-bold text-xl">
+                    Rp{history && history.expense ? rupiah(history.expense) : 0}
+                  </p>
                 </div>
               </div>
 
-              <div className="h-40">Traffic</div>
+              <div className="">Traffic</div>
+              <BarChart />
             </div>
 
             {/* history */}
@@ -184,9 +208,9 @@ export default function Home() {
                   see all
                 </p>
               </div>
-              {income === true
-                ? history &&
-                  history.map((item, index) => {
+              {income === true ? (
+                history && history.data ? (
+                  history.data.map((item, index) => {
                     if (
                       item.user_id === item.sender_id &&
                       id !== item.user_id
@@ -208,10 +232,16 @@ export default function Home() {
                               height={200}
                               className="w-10 h-10 bg-primary rounded-lg mt-5"
                             />
-                            <div>
-                              <p className="text-sm">{`${item.first_name}`}</p>
+                            <div className="mt-4">
+                              <p className="text-sm">
+                                {item.first_name ? (
+                                  item.first_name
+                                ) : (
+                                  <Skeleton />
+                                )}
+                              </p>
                               <p className="text-sm text-slate-400">
-                                {item.phone}
+                                {item.sender_number}
                               </p>
                             </div>
                           </div>
@@ -222,43 +252,52 @@ export default function Home() {
                       );
                     }
                   })
-                : history &&
-                  history.map((item, index) => {
-                    if (
-                      item.user_id === item.receiver_id &&
-                      id !== item.user_id
-                    ) {
-                      return (
-                        <div
-                          key={index}
-                          className="flex items-center justify-between px-5"
-                        >
-                          <div className="flex justify-center content-center items-center">
-                            <Image
-                              alt="user-image"
-                              src={
-                                item.user_image === null
-                                  ? placeholder
-                                  : item.user_image
-                              }
-                              width={200}
-                              height={200}
-                              className="w-10 h-10 bg-primary rounded-lg mt-5"
-                            />
-                            <div>
-                              <p className="text-sm">{`${item.first_name}`}</p>
-                              <p className="text-sm text-slate-400">
-                                {item.phone}
-                              </p>
-                            </div>
+                ) : (
+                  <div className="flex items-center">
+                    <Skeleton />
+                  </div>
+                )
+              ) : (
+                history &&
+                history.data ? history.data.map((item, index) => {
+                  if (
+                    item.user_id === item.receiver_id &&
+                    id !== item.user_id
+                  ) {
+                    return (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between px-5"
+                      >
+                        <div className="flex justify-start gap-2 items-center">
+                          <Image
+                            alt="user-image"
+                            src={
+                              item.user_image === null
+                                ? placeholder
+                                : item.user_image
+                            }
+                            width={200}
+                            height={200}
+                            className="w-10 h-10 bg-primary rounded-lg mt-5"
+                          />
+                          <div className="mt-4">
+                            <p className="text-sm">{item.first_name}</p>
+                            <p className="text-sm text-slate-400">
+                              {item.receiver_number}
+                            </p>
                           </div>
-                          <p className="font-bold text-red-500">
-                            -Rp{rupiah(item.amount)}
-                          </p>
                         </div>
-                      );
-                    }
-                  })}
+                        <p className="font-bold text-red-500">
+                          -Rp{rupiah(item.amount)}
+                        </p>
+                      </div>
+                    )
+                  }
+                }) : <div>
+                  <Skeleton />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -440,9 +479,12 @@ export default function Home() {
           className="text-center mx-auto"
         />
         <p className="text-bold ">Topup Successfully</p>
-        <button onClick={()=> {
-          setSuccessBox(false)
-        }} className="button-primary mt-5">
+        <button
+          onClick={() => {
+            setSuccessBox(false);
+          }}
+          className="button-primary mt-5"
+        >
           Ok
         </button>
       </div>

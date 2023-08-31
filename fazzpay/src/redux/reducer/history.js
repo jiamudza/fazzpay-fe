@@ -1,4 +1,4 @@
-const initialState = { loading: false, history: [], error: [] };
+const initialState = { loading: false, history: {}, error: {} };
 
 const historyReducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -8,16 +8,18 @@ const historyReducer = (state = initialState, action = {}) => {
         loading: true,
       };
     case "GET_HISTORY_SUCCESS":
+      console.log(action.payload)
       return {
         ...state,
         loading: false,
         history: action.payload,
       };
     case "GET_HISTORY_FAIL":
+      console.log(action.payload)
       return {
         ...state,
         loading: true,
-        history: [],
+        history: {},
         error: action.payload,
       };
     default:
@@ -25,6 +27,7 @@ const historyReducer = (state = initialState, action = {}) => {
         ...state,
       };
   }
+
 };
 
 export default historyReducer
