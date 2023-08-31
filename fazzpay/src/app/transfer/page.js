@@ -23,7 +23,7 @@ export default function Transfer() {
 
   return (
     <div className="font-nunito bg-[#e5e5e5] h-full">
-      <header className="px-10 py-6 bg-white">
+      <header className="px-10 py-6 bg-white sticky top-0 z-20">
         <Header />
       </header>
       <div
@@ -33,7 +33,7 @@ export default function Transfer() {
         <div className="hidden lg:block">
           <MainMenu />
         </div>
-        <main className="w-full relative mt-10 bg-white p-5 rounded-lg shadow-2xl">
+        <main className="w-full mt-10 bg-white p-5 rounded-lg shadow-2xl">
           <p className="text-xl font-bold">Search Receiver</p>
           <input
             onChange={(e) => {
@@ -79,7 +79,7 @@ export default function Transfer() {
               }
             })}
           {/* pagination */}
-          <div className="absolute bottom-10 flex justify-center gap-2 w-full items-center">
+          <div className="flex mt-40 justify-center gap-2 w-full items-center">
             <div className="bg-white relative text-primary border-2 border-primary h-6 w-6 rounded-full hover:scale-110 duration-150 focus:scale-100">
               <AiOutlineLeft onClick={() => {
                 page === 1 ? setPage(1) : setPage(page -1)
