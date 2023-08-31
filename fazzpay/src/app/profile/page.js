@@ -94,7 +94,7 @@ export default function Profile() {
             <button onClick={() => {
               localStorage.removeItem('@fazzLogin')
               deleteCookie("login");
-              router.push('profile')
+              router.push('/')
             }} className="font-bold text-sm mt-4 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
               Logout
               <BsArrowRight size={20} className="text-slate-300" />
