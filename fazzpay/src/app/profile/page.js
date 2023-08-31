@@ -1,5 +1,5 @@
 "use client";
-import MainMenu from "../../app/components/MainMenu";
+import MainMenu from "../../components/MainMenu";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -9,8 +9,8 @@ import { RxPencil1 } from "react-icons/rx";
 import { BsArrowRight } from "react-icons/bs";
 
 import placeholder from '../../assets/img/placeholder.jpg'
-import Header from "../../app/components/Header";
-import FooterAfterLogin from "../components/FooterAfterLogin";
+import Header from "../../components/Header";
+import FooterAfterLogin from "../../components/FooterAfterLogin";
 import { useSelector } from "react-redux";
 
 import Skeleton from 'react-loading-skeleton'

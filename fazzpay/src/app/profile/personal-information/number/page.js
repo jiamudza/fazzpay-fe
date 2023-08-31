@@ -1,7 +1,7 @@
 "use client";
-import FooterAfterLogin from "../../../../app/components/FooterAfterLogin";
-import Header from "../../../../app/components/Header";
-import MainMenu from "../../../../app/components/MainMenu";
+import FooterAfterLogin from "../../../../components/FooterAfterLogin";
+import Header from "../../../../components/Header";
+import MainMenu from "../../../../components/MainMenu";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";

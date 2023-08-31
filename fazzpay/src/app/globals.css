@@ -76,6 +76,10 @@ body {
     @apply -left-full
 }
 
+.main-content {
+@apply p-10 w-full m-10 bg-white rounded-xl shadow-xl
+}
+
 
 
 

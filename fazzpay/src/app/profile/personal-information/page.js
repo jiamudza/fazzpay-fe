@@ -1,13 +1,16 @@
 "use client";
-import MainMenu from "../../..//app/components/MainMenu";
-import Header from "../../../app/components/Header";
+import MainMenu from "../../../components/MainMenu";
+import Header from "../../../components/Header";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
-import FooterAfterLogin from "../../../app/components/FooterAfterLogin";
+import FooterAfterLogin from "../../../components/FooterAfterLogin";
 import { useSelector } from "react-redux";
+
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function PersonalInformation() { 
   const router = useRouter();
@@ -31,15 +34,16 @@ export default function PersonalInformation() {
 
           <div className="mt-10">
             <p className="text-sm mt-4 text-slate-400">First Name</p>
-            <p className="font-bold mt-2">{data.first_name}</p>
+            <p className="font-bold mt-2">{data.first_name ? data.first_name : <Skeleton height={'2rem'} width={200}/>}</p>
             <p className="text-sm mt-4 text-slate-400">last_name Name</p>
-            <p className="font-bold mt-2">{data.last_name}</p>
+            <p className="font-bold mt-2">{data.last_name ? data.last_name : <Skeleton height={'2rem'} width={200}/>}</p>
             <p className="text-sm mt-4 text-slate-400">Verified E-mail</p>
-            <p className="font-bold mt-2 text-slate-400">{data.email}</p>
+            <p className="font-bold mt-2 text-slate-400">{data.email ? data.email : <Skeleton height={'2rem'} width={200}/>}</p>
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-sm mt-4 text-slate-400">Phone Number</p>
-                <p className="font-bold mt-2">{data.phone}</p>
+                <p className="font-bold mt-2">{data.phone ? data.phone :
+                 <Skeleton height={'2rem'} width={200}/>}</p>
               </div>
               <Link href="/profile/personal-information/number" className="text-primary text-sm font-bold">Manage</Link>
             </div>
