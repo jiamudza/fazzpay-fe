@@ -17,7 +17,9 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 export default function Profile() {
+  const router = useRouter()
   const {data} = useSelector(state => state.userDataById)
 
   const handleImage = (e) => {
@@ -89,9 +91,10 @@ export default function Profile() {
               Change PIN
               <BsArrowRight size={20} />
             </Link>
-            <button href="/" onClick={() => {
+            <button onClick={() => {
               localStorage.removeItem('@fazzLogin')
               deleteCookie("login");
+              router.push('profile')
             }} className="font-bold text-sm mt-4 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">
               Logout
               <BsArrowRight size={20} className="text-slate-300" />
