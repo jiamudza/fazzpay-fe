@@ -23,6 +23,7 @@ export default function Profile() {
   const {data} = useSelector(state => state.userDataById)
 
   const handleImage = (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append("userImage", e.target.files[0]);
     console.log(e.target.files[0]);
@@ -34,10 +35,10 @@ export default function Profile() {
         "Content-Type": "multipart/form-data",
       },
     })
-      .then((res) => res.data.data)
+      .then((res) => {
+        location.reload()
+      })
       .catch((err) => console.log(err.message));
-
-      location.reload()
   };
 
   return (
