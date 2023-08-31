@@ -35,7 +35,7 @@ export default function PersonalInformation() {
           <div className="mt-10">
             <p className="text-sm mt-4 text-slate-400">First Name</p>
             <p className="font-bold mt-2">{data.first_name ? data.first_name : <Skeleton height={'2rem'} width={200}/>}</p>
-            <p className="text-sm mt-4 text-slate-400">last_name Name</p>
+            <p className="text-sm mt-4 text-slate-400">Last Name</p>
             <p className="font-bold mt-2">{data.last_name ? data.last_name : <Skeleton height={'2rem'} width={200}/>}</p>
             <p className="text-sm mt-4 text-slate-400">Verified E-mail</p>
             <p className="font-bold mt-2 text-slate-400">{data.email ? data.email : <Skeleton height={'2rem'} width={200}/>}</p>
