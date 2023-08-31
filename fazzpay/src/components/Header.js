@@ -40,8 +40,7 @@ const Header = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (localStorage.getItem("@fazzLogin")) {
-      const userId = JSON.parse(localStorage.getItem("@fazzLogin")).user
-        .user_id;
+      const userId = JSON.parse(localStorage.getItem("@fazzLogin")).user.user_id;
       setIsLogin(true);
       dispatch(getUserById(userId));
     } else {
@@ -80,7 +79,7 @@ const Header = () => {
             <div>
               <div className="flex content-center gap-5 justify-between items-center">
                 <div className="flex content-center justify-between items-center gap-3">
-                  {data.user_image && (
+                  {data&& data.user_image && (
                     <Image
                       src={
                         data.user_image === null ? placeholder : data.user_image

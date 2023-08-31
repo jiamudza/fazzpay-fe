@@ -52,8 +52,8 @@ export default function Profile() {
         <div className="flex flex-col content-center items-center p-10 w-full m-10 bg-white rounded-xl shadow-xl">
 
 
-              {data.user_image && <Image
-                src={data.user_image === null ? placeholder : data.user_image}
+              {<Image
+                src={!data.user_image ? placeholder : data.user_image}
                 width={1200}
                 height={1200}
                 alt="user-image"
@@ -73,8 +73,8 @@ export default function Profile() {
             type="file"
             className="mx-auto text-center opacity-0 absolute -z-10"
           />
-          <p className="font-bold mt-5">{`${data.first_name} ${data.last_name}`|| <Skeleton />}</p>
-          <p className="text-sm text-slate-400">{data.phone}</p>
+          <p className="font-bold mt-5">{data.first_name ? `${data.first_name} ${data.last_name}` : <Skeleton width={300} height={'2rem'} />}</p>
+          <p className="text-sm text-slate-400">{data.phone ? data.phone : <Skeleton width={100}/>}</p>
 
           <div className="mt-4">
             <Link href="profile/personal-information" className="font-bold text-sm mt-2 bg-slate-300 w-80 flex justify-between px-2 rounded-lg py-3">

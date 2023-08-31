@@ -56,7 +56,7 @@ const BarChart = () => {
             maintainAspectRatio: false,
             responsive: true
         })
-    })
+    }, [])
   return (
     <>
         <div className={styles.container}>
