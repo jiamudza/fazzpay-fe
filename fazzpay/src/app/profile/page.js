@@ -26,7 +26,6 @@ export default function Profile() {
     e.preventDefault();
     const formData = new FormData();
     formData.append("userImage", e.target.files[0]);
-    console.log(e.target.files[0]);
     axios({
       url: `https://fazz.adaptable.app/api/v1/user/image/${data.user_id}`,
       method: "PATCH",
