@@ -35,7 +35,7 @@ export default function ChangePassword() {
       setErrMessage("password length must be of 8-15 characters");
     } else {
       axios({
-        url: `http://localhost:5000/api/v1/auth/update-password`,
+        url: `https://fazz.adaptable.app/api/v1/auth/update-password`,
         method: "PATCH",
         data: password,
       })
