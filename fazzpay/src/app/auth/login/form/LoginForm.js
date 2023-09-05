@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Link from "next/link"
 
 //icon
 import { GoMail } from "react-icons/go";
@@ -123,14 +124,11 @@ export default function LoginForm() {
             />
           )}
         </div>
-        <p
-          onClick={() => {
-            router.push("/auth/forgot-password");
-          }}
+        <Link href="/auth/reset-password"
           className="font-bold text-end mt-3 cursor-pointer"
         >
           Forgot Passoword?
-        </p>
+        </Link>
 
         <button
           onClick={login}
